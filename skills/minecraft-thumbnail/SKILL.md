@@ -30,6 +30,7 @@ Vault'a yazmadan önce `AGENTS.md` dosyasını oku. Dosya adı, link ve telif ku
 | Referansa / siparişe göre ayarları değiştirme | `techniques/adapt-to-reference.md` |
 | Karakteri sahneden koparma (hale + beyaz kenar) | `techniques/character-pop.md` |
 | Yazı, 3D başlık, isim etiketi, **oyun içi efekt kutusu** (`tools/mc_effect_box.py`) | `techniques/text-typography.md` |
+| **Render'lardan taslak üretme (kodla)** | `tools/thumbkit.py` (her fonksiyon bir teknik notuna karşılık gelir) |
 | Blur, hız çizgileri, zemin/ayrıştırma gölgesi, parıltı, eşya glow | `techniques/action-effects.md` |
 | Kontur, aura, vinyet, split, god rays, partikül, UI, 2D... (taslak) | `techniques/style-catalog.md` |
 | Politika, Mojang kuralları, lisans, sipariş/teslim, en sık 10 hata | `guides/pitfalls.md` |
@@ -69,6 +70,7 @@ Normal akış: iş gelir → istenenler söylenir → istenirse referans resim v
 4. Tarz kartından başla, sonra `techniques/adapt-to-reference.md` tablosuyla "Referanstan uyarlanan ayarlar" bölümünü doldur: değişen her adım için videodaki değer → bu işteki değer → neden. Referans yoksa `references/lessons.md` + video değerleriyle başla.
 5. Alttan üste katman planını kesin ayarlar ve teknik notu linkleriyle yaz.
 5b. Planı `guides/pitfalls.md` ve `guides/common-mistakes.md` ile kontrol et.
+5c. **Plan yetmez:** render'lar varsa `tools/thumbkit.py` ile `orders/<is>/compose.py` yazıp **gerçek taslağı üret** (NMS gölge, sis, karakterlere ambient + beyaz kontur + rim, temas gölgesi, hız çizgileri, 3D UI levhası, split ayırıcı, export). Taslağı referansla yan yana koy, analiz listesini tekrar uygula, farkları düzeltip tekrar üret. Kullanıcıya plan değil, taslak göster.
 6. Sadece işi durduran eksikleri kısa sorular olarak sor (skin, sahne, yazı, boyut).
 7. Teslimden önce `/mcthumb:check <çıktı> orders/<is>` → brief maddeleri + referansla yan yana karşılaştırma. İş bitince `status: teslim`.
 

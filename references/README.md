@@ -37,7 +37,7 @@ Görseli sohbete at veya yolunu ver ve "bunu referans olarak ekle" de. Claude s�
 
 Mevcut notlarda olmayan bir teknik görürse kendiliğinden not açmaz, önce sana önerir.
 
-## Analiz listesi (15 madde)
+## Analiz listesi (18 madde)
 | # | Madde | Neye bakılır |
 |---|---|---|
 | 1 | Odak noktası | Göz 1 saniyede nereye gidiyor? Tek bir baskın öğe olmalı. |
@@ -46,7 +46,7 @@ Mevcut notlarda olmayan bir teknik görürse kendiliğinden not açmaz, önce sa
 | 4 | Poz ve bakış | Poz dinamik mi, ifade okunuyor mu, bakış ana nesneye mi gidiyor? |
 | 5 | Kalabalık | En fazla 3 ana öğe olmalı (karakter, nesne, kısa yazı). |
 | 6 | Derinlik | Ön plan, konu ve arka plan ayrı mı? Sis, blur veya soluk arka plan var mı? → [Depth map sis](../techniques/04-depth-map-fog.md) |
-| 7 | Ayrışma | Konu arka plandan nasıl ayrılıyor: beyaz kontur, dış glow, rim light? |
+| 7 | Ayrışma | **Karakterlerin etrafında ne var?** Yakından bak: ince beyaz kontur mu, dış glow mu, koyu hale mi, rim light mı? Arka plandaki nesnelerde (kaktüs gibi) de var mı? |
 | 8 | Işık yönü | Tek ana ışık var mı, arka plandaki kaynakla uyuyor mu, sıcak/soğuk ayrımı var mı? |
 | 9 | Kenar parlaması | Işığa bakan kenarlarda highlight veya rim light var mı? → [Highlight](../techniques/11-highlights.md) |
 | 10 | Gölge ve vinyet | Temas veya drop shadow var mı, kenarlarda kararma var mı? → [Elle gölge](../techniques/07-hand-shadows.md) |
@@ -55,6 +55,9 @@ Mevcut notlarda olmayan bir teknik görürse kendiliğinden not açmaz, önce sa
 | 13 | Yazı | 0–4 kelime, kalın ve konturlu, genelde üst üçte birde, başlığı tekrar etmemeli. |
 | 14 | Küçük boyut | 168x94 önizlemede hâlâ anlaşılıyor mu (göz kısma testi)? |
 | 15 | Güvenli alan | Sağ alt köşede (video süresi rozeti) önemli bir şey olmamalı. |
+| 16 | Katman sırası | Kim kimin önünde? UI kutusu ya da yazı bir karakterin **arkasında** mı (ör. ayak kutunun üstünden geçiyor)? |
+| 17 | UI öğeleri | Kutu, etiket ve ikonlar düz mü, **3D levha** mı (kalınlık, perspektif, eğim, dış kontur)? |
+| 18 | Hareket efektleri | Hız çizgileri nasıl: uzun ve düz değil; ince, iki ucu sivri, yarı saydam, karakterlerin arkasında mı? |
 
 Liste şu kaynaklardan derlendi:
 - thumbnailcreator.com — thumbnail composition guide

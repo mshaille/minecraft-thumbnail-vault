@@ -17,7 +17,7 @@ Notlar Türkçe yazılır. Yanıtlar kullanıcının dilinde verilir.
 | `sources/` | 1 not = 1 tutorial video: zaman damgası → teknik notu tablosu. |
 | `references/` | Referans görsel notları, `images/`, `lessons.md`, `gallery.base`. |
 | `templates/` | Obsidian şablonları: `teknik.md`, `video-source.md`, `referans.md`. |
-| `tools/` | `analyze_reference.py` (Pillow): boyut, oran, palet, parlaklık/doygunluk, 120/168 px önizleme. `mc_effect_box.py`: oyunun kendi font/kutu/ikon dosyalarıyla efekt kutusu PNG'si (Mojang dosyaları repoya konmaz). |
+| `tools/` | `analyze_reference.py` (Pillow): boyut, oran, palet, parlaklık/doygunluk, 120/168 px önizleme. `mc_effect_box.py`: oyunun kendi font/kutu/ikon dosyalarıyla efekt kutusu PNG'si (Mojang dosyaları repoya konmaz).  `thumbkit.py`: tekniklerin kodla uygulanmış hali (NMS gölge, sis, ambient, kontur, rim, temas gölgesi, hız çizgileri, 3D UI levhası, split, export). |
 | `dev/` | Yol haritası, değişiklik günlüğü. |
 | `skills/minecraft-thumbnail/` | Skill giriş noktası (SKILL.md). |
 | `.claude-plugin/` | Plugin ve marketplace manifestleri. |
