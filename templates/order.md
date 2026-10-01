@@ -19,6 +19,13 @@ tags: [siparis]
 - **Yan tarz (en fazla bir):**
 - **Neden bu tarz:** (brief'teki kelimeler / referanstaki ipuçları)
 
+## Render'lar
+Render dosyalarını `renders/` altına koy (split işte `renders/left/`, `renders/right/`). Her karakter için shader'sız / DMS / NMS geçişlerini eşleştir: aynı karakterin geçişlerinde şeffaflık sınırları (bbox) birebir aynıdır. DMS gri değeri yakınlığı verir (beyaz = yakın).
+
+| Karakter / katman | Shader'sız | DMS (yakınlık) | NMS | Konum |
+|---|---|---|---|---|
+| | | | | |
+
 ## İstenenler
 - **Konu / video:**
 - **Karakterler, skin'ler, pozlar:**

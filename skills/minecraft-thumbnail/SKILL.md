@@ -29,7 +29,7 @@ Vault'a yazmadan önce `AGENTS.md` dosyasını oku. Dosya adı, link ve telif ku
 | **Tarz seçimi** (clean render, sinematik, SMP/drama, split, hardcore, manhunt, korku, build, 2D, meme, Shorts) | `styles/README.md` → `styles/NN-*.md` |
 | Referansa / siparişe göre ayarları değiştirme | `techniques/adapt-to-reference.md` |
 | Karakteri sahneden koparma (hale + beyaz kenar) | `techniques/character-pop.md` |
-| Yazı, 3D başlık, isim etiketi | `techniques/text-typography.md` |
+| Yazı, 3D başlık, isim etiketi, **oyun içi efekt kutusu** (`tools/mc_effect_box.py`) | `techniques/text-typography.md` |
 | Blur, hız çizgileri, zemin/ayrıştırma gölgesi, parıltı, eşya glow | `techniques/action-effects.md` |
 | Kontur, aura, vinyet, split, god rays, partikül, UI, 2D... (taslak) | `techniques/style-catalog.md` |
 | Politika, Mojang kuralları, lisans, sipariş/teslim, en sık 10 hata | `guides/pitfalls.md` |

@@ -55,7 +55,7 @@ python3 tools/analyze_reference.py path/to/thumbnail.png -o /tmp/previews
 | [guides/](guides/) | Pitfalls (YouTube policy, Mojang rules, licences, commission practice) and common mistakes |
 | [sources/](sources/) | One note per tutorial video, mapping each timestamp to a technique |
 | [references/](references/README.md) | Reference images, the 15-item checklist and lessons learned |
-| [tools/](tools/analyze_reference.py) | `analyze_reference.py`: size, ratio, palette, brightness and saturation, small-size previews |
+| [tools/](tools/) | `analyze_reference.py` (reference analysis) and `mc_effect_box.py` (renders the in-game effect box, e.g. "Levitation X / 00:21", from your own installed game's font and UI files; no Mojang files are shipped) |
 | [templates/](templates/) | Obsidian templates for techniques, sources and references |
 | [skills/](skills/minecraft-thumbnail/SKILL.md) · [commands/](commands/) · [.claude-plugin/](.claude-plugin/) | Plugin files |
 | [AGENTS.md](AGENTS.md) | Conventions for AI sessions that extend the vault |
