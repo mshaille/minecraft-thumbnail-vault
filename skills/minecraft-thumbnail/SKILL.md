@@ -26,12 +26,13 @@ Vault'a yazmadan önce `AGENTS.md` dosyasını oku. Dosya adı, link ve telif ku
 | Gökyüzü, kar, lens flare, overlay | `techniques/10-sky-and-assets.md` |
 | Highlight (kenar parlaması) | `techniques/11-highlights.md` |
 | Export, YouTube boyut/limit | `techniques/12-export.md` |
+| Referansa / siparişe göre ayarları değiştirme | `techniques/adapt-to-reference.md` |
 | Photopea'da nasıl yapılır | `techniques/photopea-compatibility.md` |
 | Hangi video, hangi dakika | `sources/*.md` |
 | Ayar penceresinin görüntüsü (sadece yerelde) | `local/video-frames/` (varsa; Read ile görüntü olarak aç) |
 
 ## Komutlar
-`/mcthumb:ref` → B · `/mcthumb:plan` → C · `/mcthumb:check` → C.3 (kaydetmeden kontrol) · `/mcthumb:learn` → D. Teknik soruları (A) komutsuz, doğrudan sorulur. Komut dosyaları: `commands/`.
+`/mcthumb:order` → C (sipariş) · `/mcthumb:ref` → B · `/mcthumb:check` → teslim kontrolü · `/mcthumb:learn` → D. Teknik soruları (A) komutsuz sorulur. Komut dosyaları: `commands/`.
 
 ## İş akışları
 
@@ -50,11 +51,17 @@ Vault'a yazmadan önce `AGENTS.md` dosyasını oku. Dosya adı, link ve telif ku
 6. `references/lessons.md` notunu güncelle (tekrar eden kalıplar). `references/README.md` içindeki listeye link ekle.
 7. Görsel başkasına aitse ve repo herkese açıksa, commit'lemeden önce kullanıcıya sor. Gerekirse `local/` altında tut.
 
-### C) Yeni thumbnail planla
-1. `references/lessons.md` notunu oku. Konuya/biyoma uyan 2–3 referansı etiketlerinden seç ve oku.
-2. Alttan üste bir katman planı öner: render'lar → NMS gölge/ışık → depth sis → Camera Raw → Layer Style → elle gölge → renk → glow → asset'ler → highlight → (yazı) → export. Her satıra ilgili teknik notunun linkini ve referanslardan gelen hex renkleri ekle.
-3. Kullanıcı taslağını gönderirse script'i onun üzerinde de çalıştır. Referansla yan yana analiz listesi tablosu ve 168x94 testi yap.
-4. Bitmiş işi `type: referans`, `kaynak: kendi` ile referanslara ekle.
+### C) Sipariş / yeni thumbnail (`/mcthumb:order`)
+Normal akış: iş gelir → istenenler söylenir → istenirse referans resim verilir.
+1. `orders/YYYY-MM-DD-kisa-ad/` klasörünü aç: `brief.md` (`templates/order.md` şablonundan) + `refs/`. **`orders/` gitignore'da**; müşteri verisi asla public repoya girmez, `references/` kütüphanesine de kullanıcı istemeden kopyalanmaz.
+2. İstenenleri `brief.md` → "İstenenler" bölümüne yaz.
+3. Referans resimleri `refs/` içine koy. Her biri için script'i çalıştır (vault kökünden):
+   `python3 tools/analyze_reference.py orders/<is>/refs/<img> -o orders/<is>/refs/previews --rel orders/<is>`
+   Sonra görsellere ve önizlemelere Read ile bak.
+4. `techniques/adapt-to-reference.md` tablosuyla "Referanstan uyarlanan ayarlar" bölümünü doldur: değişen her adım için videodaki değer → bu işteki değer → neden. Referans yoksa `references/lessons.md` + video değerleriyle başla.
+5. Alttan üste katman planını kesin ayarlar ve teknik notu linkleriyle yaz.
+6. Sadece işi durduran eksikleri kısa sorular olarak sor (skin, sahne, yazı, boyut).
+7. Teslimden önce `/mcthumb:check <çıktı> orders/<is>` → brief maddeleri + referansla yan yana karşılaştırma. İş bitince `status: teslim`.
 
 ### D) Yeni tutorial videosu öğren
 `AGENTS.md` → "Yeni tutorial videosu ekleme" bölümünü uygula. Videoyu kare kare izle, değerleri ayar pencerelerinden oku. Kaynak notunu aç, teknik notlarını güncelle, bu tablodaki ve `Home.md` içindeki yönlendirmeyi güncelle.

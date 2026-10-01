@@ -12,7 +12,7 @@ Tutorial videos were watched frame by frame and every step was written down with
 - **Step-by-step workflow (12 steps)** with exact values. It covers NMS/normal-map shading with *Color Range*, depth-map fog, a Camera Raw preset, layer styles that place the character inside the scene, hand-painted shadows, recoloring, glow, sky and assets, clean tapered highlights and export.
 - **Photopea compatibility table.** Every step was tested in Photopea. Where Photopea lacks something (Camera Raw HSL, sharpening, resample on export), a workaround is given.
 - **Reference library.** Add thumbnails you like. Claude analyzes each one: dominant palette, brightness and saturation, a 168x94 readability test and a 15-item composition checklist. It links what it sees to the technique notes and keeps a running "lessons learned" note.
-- **Thumbnail planning.** Claude reads those lessons, picks matching references and proposes a bottom-to-top layer stack with settings and hex colors.
+- **Orders.** The usual job flow: an order comes in, the client says what they want and may attach reference images. `/mcthumb:order` creates a local order folder, analyzes the references and adapts every setting to them, for example fog color from the reference sky, HSL boosts from its dominant colors, shadow and highlight sides from its light direction. It ends with a bottom-to-top layer plan. Orders stay on your machine (`orders/` is git-ignored).
 - **Thumbnail check.** Claude checks a finished image against current YouTube limits (3840x2160 recommended, 50 MB from desktop) and the checklist.
 - **Grows over time.** `/mcthumb:learn` adds a new tutorial video to the vault, following the rules in [AGENTS.md](AGENTS.md).
 
@@ -20,8 +20,8 @@ Tutorial videos were watched frame by frame and every step was written down with
 | Command | What it does |
 |---|---|
 | `/mcthumb:ref <image>` | Add an image to the reference library and analyze it |
-| `/mcthumb:plan <idea>` | Plan a new thumbnail as a layer stack, using your references |
-| `/mcthumb:check <image>` | Check a finished thumbnail against YouTube specs and the checklist |
+| `/mcthumb:order <request> [reference images]` | Take an order: what is wanted plus optional reference images. Builds a plan with settings adapted to the references. |
+| `/mcthumb:check <image> [order]` | Check a finished thumbnail against YouTube specs, the checklist and the order |
 | `/mcthumb:learn <url>` | Watch a tutorial and add its techniques to the vault |
 
 For techniques, no command is needed. Just ask, for example "how do I do the depth fog?" or "explain the highlights", and the skill answers with exact settings and the Photopea equivalent.
@@ -68,4 +68,4 @@ The knowledge comes from these tutorials. The notes are short summaries in our o
 ---
 
 ## Türkçe özet
-Minecraft YouTube thumbnail'lerini Photoshop/Photopea ile yapmak için kesin ayarlı, adım adım notlar. Claude Code plugin'i ve Obsidian vault'u olarak kullanılır. Referans görsel ekleme ve analiz etme, yeni thumbnail planlama ve bitmiş işi kontrol etme özellikleri vardır. Başlangıç: [Home.md](Home.md). Komutlar: `/mcthumb:ref`, `/mcthumb:plan`, `/mcthumb:check`, `/mcthumb:learn`.
+Minecraft YouTube thumbnail'lerini Photoshop/Photopea ile yapmak için kesin ayarlı, adım adım notlar. Claude Code plugin'i ve Obsidian vault'u olarak kullanılır. Referans görsel ekleme ve analiz etme, yeni thumbnail planlama ve bitmiş işi kontrol etme özellikleri vardır. Başlangıç: [Home.md](Home.md). Normal iş akışı: sipariş gelir, istenenler söylenir, istenirse referans resim verilir → `/mcthumb:order`. Diğer komutlar: `/mcthumb:ref`, `/mcthumb:check`, `/mcthumb:learn`.

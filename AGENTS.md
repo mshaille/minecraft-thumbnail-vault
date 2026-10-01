@@ -19,8 +19,9 @@ Notlar Türkçe yazılır. Yanıtlar kullanıcının dilinde verilir.
 | `dev/` | Yol haritası, değişiklik günlüğü. |
 | `skills/minecraft-thumbnail/` | Skill giriş noktası (SKILL.md). |
 | `.claude-plugin/` | Plugin ve marketplace manifestleri. |
-| `commands/` | Plugin slash komutları: `/mcthumb:ref`, `/mcthumb:plan`, `/mcthumb:check`, `/mcthumb:learn`. |
+| `commands/` | Plugin slash komutları: `/mcthumb:order`, `/mcthumb:ref`, `/mcthumb:check`, `/mcthumb:learn`. |
 | `assets/` | Logo ve banner (SVG kaynak + PNG). Özgün tasarım: normal-map renkli voxel küp + highlight çizgisi. |
+| `orders/` | **Sadece yerel** (gitignore). Müşteri siparişleri: `orders/YYYY-MM-DD-kisa-ad/brief.md` + `refs/`. `/mcthumb:order` oluşturur. |
 | `local/` | **Sadece yerel** (gitignore). Videolardan alınmış ayar ekranı kareleri. Değer doğrulamak için Read ile bakılabilir. |
 
 ## Kurallar
@@ -45,7 +46,7 @@ Görseller en fazla ~1280x720 ve ~500 KB (JPG/WebP) olsun. Başkasının thumbna
 ## Yapma
 - `.obsidian/` içinde sadece `app.json`, `core-plugins.json`, `templates.json` repoya girer. Community plugin ekleme.
 - PSD/PSB commit'leme.
-- `local/` klasörünü commit'leme.
+- `local/` ve `orders/` klasörlerini commit'leme. Müşteri verisini (sipariş, skin, referans) public repoya koyma.
 
 ## Kontrol
 - `claude plugin validate .` → manifest + skill doğrulaması

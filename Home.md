@@ -24,6 +24,7 @@ Minecraft YouTube kapak fotoğraflarını (thumbnail) **Photoshop / Photopea** i
 | 10 | [Gökyüzü ve asset'ler](techniques/10-sky-and-assets.md) | Sky, kar, lens flare (Screen) |
 | 11 | [Highlight](techniques/11-highlights.md) | 3–5 px, karakterin içinde, uçları sivrilt, Overlay |
 | 12 | [Export](techniques/12-export.md) | PNG, güncel YouTube limitleri |
+| – | [Referansa göre uyarlama](techniques/adapt-to-reference.md) | Sipariş/referansa göre hangi ayar nasıl değişir |
 | – | [Photopea uyumluluğu](techniques/photopea-compatibility.md) | Her adımın Photopea karşılığı |
 
 ## Kaynaklar
@@ -34,6 +35,9 @@ Minecraft YouTube kapak fotoğraflarını (thumbnail) **Photoshop / Photopea** i
 - [Referans kütüphanesi ve analiz listesi](references/README.md)
 - [Referanslardan öğrenilenler](references/lessons.md)
 - Obsidian'da görsel galeri: `references/gallery.base`
+
+## Siparişler
+- `/mcthumb:order` ile açılır, `orders/` klasöründe sadece yerelde durur. Şablon: [templates/order.md](templates/order.md)
 
 ## Geliştirme
 - [Yol haritası](dev/roadmap.md) · [Değişiklik günlüğü](dev/changelog.md)
