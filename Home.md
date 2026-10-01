@@ -27,9 +27,39 @@ Minecraft YouTube kapak fotoğraflarını (thumbnail) **Photoshop / Photopea** i
 | – | [Referansa göre uyarlama](techniques/adapt-to-reference.md) | Sipariş/referansa göre hangi ayar nasıl değişir |
 | – | [Photopea uyumluluğu](techniques/photopea-compatibility.md) | Her adımın Photopea karşılığı |
 
+## Tarzlar
+Her thumbnail aynı tarzda değil. Sipariş gelince önce tarz seçilir: [Tarz rehberi](styles/README.md)
+
+| Kod | Tarz |
+|---|---|
+| S1 | [Temiz render](styles/01-clean-render.md) (ana iş akışı) |
+| S2 | [Sinematik](styles/02-cinematic.md) |
+| S3 | [SMP / drama](styles/03-smp-drama.md) |
+| S4 | [Split / ilerleme](styles/04-split-progression.md) |
+| S5 | [Hardcore / survival](styles/05-hardcore-survival.md) |
+| S6 | [Speedrun / manhunt / PvP](styles/06-speedrun-manhunt-pvp.md) |
+| S7 | [Korku](styles/07-horror.md) |
+| S8 | [Build / showcase](styles/08-build-showcase.md) |
+| S9 | [Çizim / 2D](styles/09-drawn-2d.md) |
+| S10 | [Meme / lo-fi](styles/10-meme-lofi.md) |
+| S11 | [Shorts](styles/11-shorts.md) |
+
+## Tarza özel teknikler
+- [Karakteri öne çıkarma](techniques/character-pop.md) · [Yazı](techniques/text-typography.md) · [Aksiyon efektleri](techniques/action-effects.md) · [Tarz teknikleri kataloğu (taslak)](techniques/style-catalog.md)
+
+## Rehberler
+- [Dikkat edilecekler](guides/pitfalls.md): YouTube politikası, Mojang kuralları, lisanslar, sipariş/teslim, en sık 10 hata
+- [Yaygın hatalar → düzeltme](guides/common-mistakes.md)
+
 ## Kaynaklar
 - [Spare — How to Make CLEAN Minecraft Thumbnails](sources/spare-clean-thumbnails.md)
 - [zestu's studio — How to do Highlights](sources/zestu-highlights.md)
+- [Spare — render kısmı (0:00–6:27)](sources/spare-clean-thumbnails-render-part.md)
+- [ItsProger — Blender ile temiz render](sources/itsproger-blender-clean-renders.md)
+- [Nebular — SB737 aksiyon thumbnail'i](sources/nebular-sb737-action-thumbnail.md)
+- [Schxnappi_ — layer style ve yazı](sources/schxnappi-layer-styles-text.md)
+- [Pqtrick — thumbnail düzeltme (eleştiri)](sources/pqtrick-fixing-thumbnails.md)
+- [Swiffex — Photopea ile Unstable SMP](sources/swiffex-photopea-unstable-smp.md)
 
 ## Referanslar
 - [Referans kütüphanesi ve analiz listesi](references/README.md)

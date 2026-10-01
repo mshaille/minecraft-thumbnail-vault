@@ -28,5 +28,10 @@ status: stabil
 ## Karıştırma
 - Highlight katmanını **Overlay** yap. Abartısız ve ince durur, iki kaynak da bunu öneriyor. Soft Light da denenebilir.
 
+## Tarz farkı: yumuşak highlight (Swiffex, Unstable SMP / no-shader)
+- Fırça **3 px, Hardness %0**, Normal, %100. Uçları yumuşak silgiyle söndür: Opacity **%11**, ~50 px (anlatıcı ~20 px ve %10 diyor).
+- Spare/zestu yöntemi (Hard Round %100 + Overlay) ile çelişir; ikisi de geçerli, **tarza göre** seç: temiz render → sert + Overlay; parlak no-shader SMP → yumuşak + Normal.
+- **Işık geçişi:** oyuncuya **clipping mask** olarak yeni katman, yumuşak beyaz fırça (%20, 100 px, hardness 0) ile güneş tarafındaki kenarları boya. Overlay yap, kopyala, kopyayı Normal yap ve opaklığı göz kararı ayarla.
+
 Önceki: [Gökyüzü ve asset'ler](10-sky-and-assets.md) · Sonraki: [Export](12-export.md)
 Kaynaklar: [Spare — Clean Thumbnails](../sources/spare-clean-thumbnails.md) (12:43–13:17) · [zestu — Highlights](../sources/zestu-highlights.md) (tamamı)

@@ -14,5 +14,7 @@ status: stabil
 
 Amaç: eşyanın rengini thumbnail'in renk temasına çekmek.
 
+> [!tip] Zırh kopyası üzerinde renk/parlaklık ayarı, büyü parıltısı (Satin) ve Selective Color ile tek renk ayırma: [Aksiyon efektleri](action-effects.md). Önce Vibrance/Exposure, sonra Satin.
+
 Önceki: [Elle gölge](07-hand-shadows.md) · Sonraki: [Glow](09-glow.md)
 Kaynak: [Spare — Clean Thumbnails](../sources/spare-clean-thumbnails.md) (11:32–12:05)

@@ -25,6 +25,9 @@ status: stabil
 
 - Limit 2 MB'tan 50 MB'a, önerilen boyut da 1280x720'den 4K'ya çıktı. Değişiklik Ekim 2025'te duyuruldu, 2026 başında herkese açıldı. 1280x720 / 2 MB yazan rehberler eskidi.
 - Masaüstünden yükle. Mobilden yükleyeceksen 2 MB altına inmek için JPG (kalite ~90) export et.
+- **Shorts:** 2160x3840 (9:16). Özel Shorts thumbnail'ı Temmuz 2026'dan beri YPP üyelerine açılıyor, A/B testi yok. Dikey videolarda Ana Sayfa'da otomatik **4:5** kırpma gösterilir; önemli öğeleri ortada tut.
+- **Teslim paketi:** 3840x2160 PNG + 2 MB altı JPG (+ gerekirse Shorts sürümü). Ayrıntı: [Dikkat edilecekler](../guides/pitfalls.md).
+- **Kontrol:** 120 px ve 168 px genişlikte okunuyor mu, sağ alt köşe (süre etiketi) ve alt kenar (ilerleme çubuğu) boş mu.
 
 Kaynaklar:
 - <https://support.google.com/youtube/answer/72431>

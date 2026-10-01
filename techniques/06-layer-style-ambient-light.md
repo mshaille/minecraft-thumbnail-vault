@@ -22,5 +22,7 @@ Oyuncu katmanına çift tıkla → **Layer Style**:
 - Sonradan oyuncu 1'in efekt listesinde Drop Shadow da görünüyor ama ayarı videoda gösterilmedi.
 - Değerler videoda birkaç kez değişti. Tabloda ekranda kalan son değerler var.
 
+> [!tip] Bu preset karakteri sahneye **oturtur** (yumuşak, temiz render tarzı). Yüksek enerjili SMP/aksiyon tarzında karakteri sahneden **koparan** preset'ler için: [Karakteri öne çıkarma](character-pop.md).
+
 Önceki: [Camera Raw](05-camera-raw.md) · Sonraki: [Elle gölge](07-hand-shadows.md)
 Kaynak: [Spare — Clean Thumbnails](../sources/spare-clean-thumbnails.md) (9:42–10:57)

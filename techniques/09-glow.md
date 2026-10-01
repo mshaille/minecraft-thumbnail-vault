@@ -11,5 +11,7 @@ status: stabil
 - Yeni katman aç. **Hardness 0** soft fırça, temanın rengi (videoda **mor**). Parlayacak noktaya (mace'in küre ucu) tek dokunuş yap.
 - Blend mode **Linear Dodge (Add)**. Color Dodge da denendi ama Linear Dodge seçildi.
 
+- Alternatif (Nebular): beyaz yumuşak fırça noktaları, Blend **Overlay** → küçük ışık parlamaları.
+
 Önceki: [Renk değiştirme](08-recolor.md) · Sonraki: [Gökyüzü ve asset'ler](10-sky-and-assets.md)
 Kaynak: [Spare — Clean Thumbnails](../sources/spare-clean-thumbnails.md) (12:05–12:17)

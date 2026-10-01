@@ -7,6 +7,8 @@ status: taslak
 ---
 # Referansa göre ayar uyarlama
 
+**Sıra:** önce [tarz](../styles/README.md) seçilir; tarz kartı hangi adımın açık, kapalı veya değişik olacağını söyler. Bu tablo ondan sonra gelir ve değerleri **referansa göre** ince ayarlar.
+
 Videolardaki değerler tek bir sahne için (karlı dağ, açık mavi + mor). Sipariş farklı bir sahne ya da referans resim içeriyorsa, aşağıdaki tablo hangi referans özelliğinin **hangi adımı ve ayarı** değiştirdiğini gösterir.
 
 > [!warning] Bu tablo bir **uyarlama rehberi**. Videolardan gelen değerler başlangıç noktası; aralıklar öneri. Bir değer bir işte denenip işe yaradıysa notu `status: stabil` yap ve örneği ekle.

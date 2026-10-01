@@ -47,7 +47,7 @@ if a.out:
     os.makedirs(a.out, exist_ok=True)
     stem = os.path.splitext(os.path.basename(a.image))[0]
     print("\n### Küçük boyut testi\n")
-    for tag, size, img in (("168x94", (168, 94), rgb), ("320x180", (320, 180), rgb),
+    for tag, size, img in (("120x68", (120, 68), rgb), ("168x94", (168, 94), rgb), ("320x180", (320, 180), rgb),
                            ("320x180_gri", (320, 180), rgb.convert("L"))):
         fn = f"{stem}_{tag}.png"
         img.resize(size, Image.LANCZOS).save(os.path.join(a.out, fn))

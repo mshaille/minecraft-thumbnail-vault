@@ -25,5 +25,12 @@ Zırhlı oyuncu için ayrı preset: **Texture +50, Clarity +11**. Zırh dokusunu
 
 > [!note] Mavi tonlu bir sahne olduğu için Aqua/Blue doygunluğu yüksek tutulmuş. Başka renk temasında HSL'deki doygunluk artışını sahnenin ana renklerine kaydır.
 
+## Diğer preset'ler (tarza göre)
+| Kaynak | Nereye | Ayar |
+|---|---|---|
+| Pqtrick (vanilla, temiz) | Arka plan ve başlık; karaktere değil | Contrast +10, **Vibrance +100**, Texture +10, Clarity +10, gerisi 0 |
+| Swiffex (Unstable SMP, no-shader) | Karakter (Steve) | Exposure 0.8, Contrast 11, Temp 4, Vibrance 20, Texture 11 |
+| Swiffex | Duvar/arka plan | Exposure 0.6, Contrast 25, Temp 5, Vibrance 24, Texture 18 |
+
 Önceki: [Depth map sis](04-depth-map-fog.md) · Sonraki: [Ortam ışığı (Layer Style)](06-layer-style-ambient-light.md)
 Kaynak: [Spare — Clean Thumbnails](../sources/spare-clean-thumbnails.md) (9:10–9:42)

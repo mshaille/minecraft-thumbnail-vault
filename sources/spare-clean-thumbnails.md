@@ -4,7 +4,7 @@ title: How to Make CLEAN Minecraft Thumbnails (Free)
 creator: Spare
 url: https://www.youtube.com/watch?v=5XbxbzdN0x0
 duration: "13:48"
-watched: "6:27–13:48 (Photoshop kısmı), kare kare"
+watched: "tamamı: 0:00–6:27 ayrı notta, 6:27–13:48 burada; kare kare"
 watched_on: 2026-10-01
 tags: [kaynak, video, tam-surec]
 ---
@@ -38,4 +38,4 @@ overlay asset → kar/sis PNG → highlight (Overlay) → ek asset → gökyüz�
 - Anlatıcı 7:28'de "color dodge" diyor ama ekranda yapılan **Color Range**.
 - Bazı ayarlar video sırasında birkaç kez değişti. Notlara ekranda kalan son değerler yazıldı.
 - Ekranda ayarı gösterilmeyenler: oyuncu 1'deki Drop Shadow, sonradan çıkan Layer 10/11.
-- 0:00–6:27 (mod kurulumu, NPC Studio, kamera) henüz izlenmedi → [Yol haritası](../dev/roadmap.md)
+- 0:00–6:27 (mod kurulumu, NPC Studio, kamera, render alma) → [Spare — render kısmı](spare-clean-thumbnails-render-part.md)

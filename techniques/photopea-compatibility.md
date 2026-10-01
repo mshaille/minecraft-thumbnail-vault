@@ -31,6 +31,16 @@ Her adımın ücretsiz [Photopea](https://www.photopea.com)'daki karşılığı.
 - **Actions:** Window > Actions ile adım kaydedip oynatabilirsin, Photoshop **.ATN** dosyaları da içe aktarılır. File > Automate > Batch.
 - **URL API / Live Messaging:** Photopea iframe içinde açılıp `postMessage` ile script ve dosya gönderilebilir, PNG geri alınabilir. Örnek kullanım: şablon PSD'yi yükle, görseli değiştir, PNG al. Ayrıntı için [Yol haritası](../dev/roadmap.md).
 
+## Ek notlar (Swiffex ve Pqtrick videolarından)
+- **Hazır şablon eski:** New Project → Social → "Youtube Thumbnail" **1280x720** veriyor. Boyutu elle 1920x1080 veya 3840x2160 yap.
+- **Smart object'te silme:** seçimi silmeye çalışınca "Smart Object must be rasterized first" çıkar. OK dersen Camera Raw smart filtresi düzenlenemez olur. Ayak kırpma gibi işleri **layer mask** ile yap.
+- **Export As > PNG** "Save for web" penceresini açar: genişlik/yükseklik, Quality, "don't use palettes", "attach metadata" ve canlı dosya boyutu önizlemesi var (1280x720, Quality %100 → 560 KB).
+- **Maske:** Lasso ile seç, sonra Layers panelinin altındaki *Add Layer Mask* düğmesi.
+- **Clipping mask** Photoshop'taki gibi çalışır.
+- **Layer Style** pencereleri Photoshop'la aynı: Outer Glow (Softer/Range/Jitter), Drop Shadow ("Knock out drop shadow" dahil).
+- **Camera Raw Exposure** ondalık kabul eder (0.6, 0.8).
+- **Fırça sertliği** boyut açılır penceresinde; fırça çubuğunda "Smooth" ayarı var.
+
 Kaynaklar:
 - photopea.com/learn: [advanced-selecting](https://www.photopea.com/learn/advanced-selecting), [channels](https://www.photopea.com/learn/channels), [masks](https://www.photopea.com/learn/masks), [adjustments-filters](https://www.photopea.com/learn/adjustments-filters), [smart-objects](https://www.photopea.com/learn/smart-objects), [layer-styles](https://www.photopea.com/learn/layer-styles), [opening-saving](https://www.photopea.com/learn/opening-saving), [scripts](https://www.photopea.com/learn/scripts), [actions](https://www.photopea.com/learn/actions)
 - API: [photopea.com/api](https://www.photopea.com/api/), [api/live](https://www.photopea.com/api/live)

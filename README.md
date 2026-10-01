@@ -12,7 +12,8 @@ Tutorial videos were watched frame by frame and every step was written down with
 - **Step-by-step workflow (12 steps)** with exact values. It covers NMS/normal-map shading with *Color Range*, depth-map fog, a Camera Raw preset, layer styles that place the character inside the scene, hand-painted shadows, recoloring, glow, sky and assets, clean tapered highlights and export.
 - **Photopea compatibility table.** Every step was tested in Photopea. Where Photopea lacks something (Camera Raw HSL, sharpening, resample on export), a workaround is given.
 - **Reference library.** Add thumbnails you like. Claude analyzes each one: dominant palette, brightness and saturation, a 168x94 readability test and a 15-item composition checklist. It links what it sees to the technique notes and keeps a running "lessons learned" note.
-- **Orders.** The usual job flow: an order comes in, the client says what they want and may attach reference images. `/mcthumb:order` creates a local order folder, analyzes the references and adapts every setting to them, for example fog color from the reference sky, HSL boosts from its dominant colors, shadow and highlight sides from its light direction. It ends with a bottom-to-top layer plan. Orders stay on your machine (`orders/` is git-ignored).
+- **Styles.** Not every thumbnail looks the same. Eleven style cards are included: clean render, cinematic, SMP/drama, split/progression, hardcore, manhunt/PvP, horror, build showcase, drawn 2D, meme/lo-fi and Shorts. Each card says which steps stay at default, which change and which are switched off, plus the extra techniques it needs. A decision guide picks the style from the client's words or a reference image.
+- **Orders.** The usual job flow: an order comes in, the client says what they want and may attach reference images. `/mcthumb:order` creates a local order folder, picks the style, analyzes the references and adapts every setting to them, for example fog color from the reference sky, HSL boosts from its dominant colors, shadow and highlight sides from its light direction. It ends with a bottom-to-top layer plan. Orders stay on your machine (`orders/` is git-ignored).
 - **Thumbnail check.** Claude checks a finished image against current YouTube limits (3840x2160 recommended, 50 MB from desktop) and the checklist.
 - **Grows over time.** `/mcthumb:learn` adds a new tutorial video to the vault, following the rules in [AGENTS.md](AGENTS.md).
 
@@ -50,6 +51,8 @@ python3 tools/analyze_reference.py path/to/thumbnail.png -o /tmp/previews
 | Path | Contents |
 |---|---|
 | [techniques/](techniques/) | One note per technique, with exact settings and the Photopea table |
+| [styles/](styles/README.md) | Style guide: decision guide, style × technique matrix, trends and 11 style cards |
+| [guides/](guides/) | Pitfalls (YouTube policy, Mojang rules, licences, commission practice) and common mistakes |
 | [sources/](sources/) | One note per tutorial video, mapping each timestamp to a technique |
 | [references/](references/README.md) | Reference images, the 15-item checklist and lessons learned |
 | [tools/](tools/analyze_reference.py) | `analyze_reference.py`: size, ratio, palette, brightness and saturation, small-size previews |
@@ -61,6 +64,11 @@ python3 tools/analyze_reference.py path/to/thumbnail.png -o /tmp/previews
 The knowledge comes from these tutorials. The notes are short summaries in our own words; no video content is redistributed here. Watch the originals for the full explanation:
 - **Spare**, [How to Make CLEAN Minecraft Thumbnails (Free)](https://www.youtube.com/watch?v=5XbxbzdN0x0). Free PSD and assets are on [Ko-fi](https://ko-fi.com/s/b43cc2d180).
 - **zestu's studio**, [How to do Highlights for Minecraft Thumbnails](https://www.youtube.com/watch?v=C7Xd8eJLpro).
+- **Nebular**, [How To Make THE BEST Minecraft Thumbnails [2026]](https://www.youtube.com/watch?v=uVg0hR0uUS4).
+- **Schxnappi_**, [How to make the BEST Minecraft Thumbnails](https://www.youtube.com/watch?v=zGVLm-9RM6I).
+- **Pqtrick**, [Fixing Your Minecraft Thumbnails!](https://www.youtube.com/watch?v=8W67cb0JJBM).
+- **Swiffex**, [How To Make Unstable SMP Thumbnails For Free](https://www.youtube.com/watch?v=IXVwYGiyrVY).
+- **ItsProger**, [How to Make CLEAN Minecraft Renders With Blender](https://www.youtube.com/watch?v=tvDzfBp6gjE).
 
 ## License
 [MIT](LICENSE). Not affiliated with Mojang, Microsoft, Adobe or Photopea. Minecraft is a trademark of Mojang Synergies AB.

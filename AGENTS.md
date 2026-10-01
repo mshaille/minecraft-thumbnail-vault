@@ -12,6 +12,8 @@ Notlar Türkçe yazılır. Yanıtlar kullanıcının dilinde verilir.
 | Klasör | İçerik |
 |---|---|
 | `techniques/` | 1 not = 1 teknik/adım, kesin ayarlarla. `order` alanı süreç sırasıdır. |
+| `styles/` | Tarz rehberi (`README.md`: karar rehberi, matris, trendler) + her tarz için bir kart (S1–S11). Sipariş önce tarz seçer. |
+| `guides/` | Konu dışı ama kritik rehberler: `pitfalls.md` (politika, telif, sipariş), `common-mistakes.md`. |
 | `sources/` | 1 not = 1 tutorial video: zaman damgası → teknik notu tablosu. |
 | `references/` | Referans görsel notları, `images/`, `lessons.md`, `gallery.base`. |
 | `templates/` | Obsidian şablonları: `teknik.md`, `video-source.md`, `referans.md`. |
@@ -29,7 +31,7 @@ Notlar Türkçe yazılır. Yanıtlar kullanıcının dilinde verilir.
 - **Linkler:** gövdede standart göreli markdown linki kullanılır (`[x](../techniques/x.md)`), çünkü GitHub wikilink göstermez. Wikilink sadece frontmatter'da, tırnak içinde (`gorsel: "[[ref-....png]]"`).
 - **Frontmatter:** her notta `type` olur (teknik | kaynak | referans | index | ozet | gelistirme). Etiketler küçük harf ve ASCII.
 - **Değerler kesin olmalı:** menü yolu + değer + birim (ör. "Fuzziness 200", "Opacity %18"). Videoda değer değiştiyse ekranda kalan son değer yazılır ve bu belirtilir.
-- **Kaynaklar çelişirse** ikisini de kaynak adıyla yaz, sessizce üzerine yazma. Kullanıcı denemediği yeni içeriğe `status: taslak` ver.
+- **Kaynaklar çelişirse** ikisini de kaynak adıyla yaz, sessizce üzerine yazma. Çelişki çoğu zaman **tarz farkıdır**: değeri ilgili tarz kartına ve teknik notunun "Tarz farkı" bölümüne yaz. Kullanıcı denemediği yeni içeriğe `status: taslak` ver.
 - **Telif:** video transkriptini veya uzun alıntıları kopyalama, kendi cümlelerinle özetle. Video karelerini sadece `local/` klasörüne koy, asla commit'leme.
 
 ## Yeni tutorial videosu ekleme

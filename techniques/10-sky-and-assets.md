@@ -14,5 +14,7 @@ status: stabil
 - **Overlay asset:** en üste, asset paketinden.
 - Ücretsiz PSD + overlay paketi: <https://ko-fi.com/s/b43cc2d180>
 
+- Hızlı gökyüzü değiştirme: **Select > Sky** → Delete, sonra yeni gökyüzünü alta koy. Özel bir güneş ve ön planda bir asset eklemek derinlik katar (Nebular).
+
 Önceki: [Glow](09-glow.md) · Sonraki: [Highlight](11-highlights.md)
 Kaynak: [Spare — Clean Thumbnails](../sources/spare-clean-thumbnails.md) (12:17–12:43)

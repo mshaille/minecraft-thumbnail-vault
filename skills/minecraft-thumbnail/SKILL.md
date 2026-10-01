@@ -26,7 +26,14 @@ Vault'a yazmadan önce `AGENTS.md` dosyasını oku. Dosya adı, link ve telif ku
 | Gökyüzü, kar, lens flare, overlay | `techniques/10-sky-and-assets.md` |
 | Highlight (kenar parlaması) | `techniques/11-highlights.md` |
 | Export, YouTube boyut/limit | `techniques/12-export.md` |
+| **Tarz seçimi** (clean render, sinematik, SMP/drama, split, hardcore, manhunt, korku, build, 2D, meme, Shorts) | `styles/README.md` → `styles/NN-*.md` |
 | Referansa / siparişe göre ayarları değiştirme | `techniques/adapt-to-reference.md` |
+| Karakteri sahneden koparma (hale + beyaz kenar) | `techniques/character-pop.md` |
+| Yazı, 3D başlık, isim etiketi | `techniques/text-typography.md` |
+| Blur, hız çizgileri, zemin/ayrıştırma gölgesi, parıltı, eşya glow | `techniques/action-effects.md` |
+| Kontur, aura, vinyet, split, god rays, partikül, UI, 2D... (taslak) | `techniques/style-catalog.md` |
+| Politika, Mojang kuralları, lisans, sipariş/teslim, en sık 10 hata | `guides/pitfalls.md` |
+| Yaygın tasarım hataları → düzeltme | `guides/common-mistakes.md` |
 | Photopea'da nasıl yapılır | `techniques/photopea-compatibility.md` |
 | Hangi video, hangi dakika | `sources/*.md` |
 | Ayar penceresinin görüntüsü (sadece yerelde) | `local/video-frames/` (varsa; Read ile görüntü olarak aç) |
@@ -55,11 +62,13 @@ Vault'a yazmadan önce `AGENTS.md` dosyasını oku. Dosya adı, link ve telif ku
 Normal akış: iş gelir → istenenler söylenir → istenirse referans resim verilir.
 1. `orders/YYYY-MM-DD-kisa-ad/` klasörünü aç: `brief.md` (`templates/order.md` şablonundan) + `refs/`. **`orders/` gitignore'da**; müşteri verisi asla public repoya girmez, `references/` kütüphanesine de kullanıcı istemeden kopyalanmaz.
 2. İstenenleri `brief.md` → "İstenenler" bölümüne yaz.
+2b. **Tarzı seç:** `styles/README.md` §1 (brief kelimeleri → tarz, referans karar ağacı). Bir ana tarz + en fazla bir yan tarz; emin değilsen sor. Tarz kartı hangi adımların açılıp kapanacağını ve hangi ek tekniklerin gerektiğini söyler.
 3. Referans resimleri `refs/` içine koy. Her biri için script'i çalıştır (vault kökünden):
    `python3 tools/analyze_reference.py orders/<is>/refs/<img> -o orders/<is>/refs/previews --rel orders/<is>`
    Sonra görsellere ve önizlemelere Read ile bak.
-4. `techniques/adapt-to-reference.md` tablosuyla "Referanstan uyarlanan ayarlar" bölümünü doldur: değişen her adım için videodaki değer → bu işteki değer → neden. Referans yoksa `references/lessons.md` + video değerleriyle başla.
+4. Tarz kartından başla, sonra `techniques/adapt-to-reference.md` tablosuyla "Referanstan uyarlanan ayarlar" bölümünü doldur: değişen her adım için videodaki değer → bu işteki değer → neden. Referans yoksa `references/lessons.md` + video değerleriyle başla.
 5. Alttan üste katman planını kesin ayarlar ve teknik notu linkleriyle yaz.
+5b. Planı `guides/pitfalls.md` ve `guides/common-mistakes.md` ile kontrol et.
 6. Sadece işi durduran eksikleri kısa sorular olarak sor (skin, sahne, yazı, boyut).
 7. Teslimden önce `/mcthumb:check <çıktı> orders/<is>` → brief maddeleri + referansla yan yana karşılaştırma. İş bitince `status: teslim`.
 
