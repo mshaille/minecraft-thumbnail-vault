@@ -17,13 +17,21 @@ Bu kural her işte, her adımda geçerlidir. "Yeterince iyi" diye teslim edilmez
 5. **İlişkileri koru:** kim kimin önünde, neye değiyor, ne neyi kapatıyor; referanstaki ilişki taslakta da aynı olmalı.
 6. **Dürüst teslim:** kalan her farkı nedeniyle birlikte açıkça yaz. Hiçbir farkı saklama, "küçük" diye geçme.
 
+## Kullanıcının çalışma tercihleri (özet; ayrıntı `guides/order-workflow.md`)
+- **Referans gelmeden tasarıma başlama.** Render'lar gelince sadece `tools/catalog_renders.py` ile katalogla.
+- Yükleme sırası genelde **sağ panel → sol panel → referans**; dosyalar numaralı/adsız ve kopyalı gelebilir.
+- Kullanıcının çıkardığı öğeyi koyma (ör. ok). Oyun yazısı **uydurulmaz**: resmi çeviri + oyunun kendi fontu (`tools/mc_effect_box.py`).
+- Plan değil **taslak** göster; `tools/compare.py` ile referansla ölçerek düzelt. Efektlerin yönünü de ölç (ör. hız çizgileri odağa doğru mu, dışa doğru mu).
+- Kullanıcıyla Türkçe konuş. Repoya kişisel bilgi/müşteri verisi girmez; commit'lerde Claude co-author satırı yok.
+
 Vault'a yazmadan önce `AGENTS.md` dosyasını oku. Dosya adı, link ve telif kuralları orada.
 
 ## Nereye bakmalı
 | İstek | Oku |
 |---|---|
 | Genel bakış, tüm adımlar | `Home.md` |
-| Render / NMS / DMS alma | `techniques/01-render-prep.md` |
+| Render / NMS / DMS alma; gelen render dosyalarını tanıma (`tools/catalog_renders.py`) | `techniques/01-render-prep.md` |
+| **Sipariş akışı uçtan uca**, kullanıcı tercihleri, kodla üretim tuzakları | `guides/order-workflow.md` |
 | Belge açma, katman düzeni | `techniques/02-document-setup.md` |
 | Gölge/ışık (Color Range) | `techniques/03-nms-shading.md` |
 | Sis, atmosfer, depth map | `techniques/04-depth-map-fog.md` |
@@ -39,7 +47,8 @@ Vault'a yazmadan önce `AGENTS.md` dosyasını oku. Dosya adı, link ve telif ku
 | Referansa / siparişe göre ayarları değiştirme | `techniques/adapt-to-reference.md` |
 | Karakteri sahneden koparma (hale + beyaz kenar) | `techniques/character-pop.md` |
 | Yazı, 3D başlık, isim etiketi, **oyun içi efekt kutusu** (`tools/mc_effect_box.py`) | `techniques/text-typography.md` |
-| **Render'lardan taslak üretme (kodla)** | `tools/thumbkit.py` (her fonksiyon bir teknik notuna karşılık gelir) |
+| **Render'lardan taslak üretme (kodla)** | `tools/thumbkit.py` (her fonksiyon bir teknik notuna karşılık gelir); iskelet `guides/order-workflow.md` |
+| **Taslağı referansla ölçerek karşılaştırma** | `tools/compare.py` (yan yana, kesit, piksel profili, renk farkı) |
 | Blur, hız çizgileri, zemin/ayrıştırma gölgesi, parıltı, eşya glow | `techniques/action-effects.md` |
 | Kontur, aura, vinyet, split, god rays, partikül, UI, 2D... (taslak) | `techniques/style-catalog.md` |
 | Politika, Mojang kuralları, lisans, sipariş/teslim, en sık 10 hata | `guides/pitfalls.md` |
@@ -73,13 +82,15 @@ Normal akış: iş gelir → istenenler söylenir → istenirse referans resim v
 1. `orders/YYYY-MM-DD-kisa-ad/` klasörünü aç: `brief.md` (`templates/order.md` şablonundan) + `refs/`. **`orders/` gitignore'da**; müşteri verisi asla public repoya girmez, `references/` kütüphanesine de kullanıcı istemeden kopyalanmaz.
 2. İstenenleri `brief.md` → "İstenenler" bölümüne yaz.
 2b. **Tarzı seç:** `styles/README.md` §1 (brief kelimeleri → tarz, referans karar ağacı). Bir ana tarz + en fazla bir yan tarz; emin değilsen sor. Tarz kartı hangi adımların açılıp kapanacağını ve hangi ek tekniklerin gerektiğini söyler.
+2c. **Render'lar referanstan önce gelirse** (genelde sağ panel → sol panel → referans): sadece `python3 tools/catalog_renders.py orders/<is>/renders/<panel>` ile katalogla, tabloyu `brief.md` → "Render'lar" bölümüne yaz, dosyaları anlamlı adlarla yeniden adlandır. **Referans gelmeden kompozisyona/efekte başlama.**
 3. Referans resimleri `refs/` içine koy. Her biri için script'i çalıştır (vault kökünden):
    `python3 tools/analyze_reference.py orders/<is>/refs/<img> -o orders/<is>/refs/previews --rel orders/<is>`
    Sonra görsellere ve önizlemelere Read ile bak.
 4. Tarz kartından başla, sonra `techniques/adapt-to-reference.md` tablosuyla "Referanstan uyarlanan ayarlar" bölümünü doldur: değişen her adım için videodaki değer → bu işteki değer → neden. Referans yoksa `references/lessons.md` + video değerleriyle başla.
 5. Alttan üste katman planını kesin ayarlar ve teknik notu linkleriyle yaz.
 5b. Planı `guides/pitfalls.md` ve `guides/common-mistakes.md` ile kontrol et.
-5c. **Plan yetmez:** render'lar varsa `tools/thumbkit.py` ile `orders/<is>/compose.py` yazıp **gerçek taslağı üret** (NMS gölge, sis, karakterlere ambient + beyaz kontur + rim, temas gölgesi, hız çizgileri, 3D UI levhası, split ayırıcı, export). Taslağı referansla yan yana koy, analiz listesini tekrar uygula, farkları düzeltip tekrar üret. Kullanıcıya plan değil, taslak göster.
+5c. **Plan yetmez:** render'lar varsa `tools/thumbkit.py` ile `orders/<is>/compose.py` yazıp **gerçek taslağı üret** (NMS gölge, renk eşleme, sis, karakterlere ambient + 3 katmanlı kenar, referans konumuna `place_fit`, temas gölgesi, hız çizgileri, 3D UI levhası, split ayırıcı, export). İskelet ve tuzaklar: `guides/order-workflow.md`.
+5d. **Ölçerek karşılaştır:** `python3 tools/compare.py <ref> <taslak> -o /tmp/kars --crop … --profile … --color …` → yan yana, büyütülmüş kesitler, kenar profilleri, renk farkları. Farkları düzeltip tekrar üret ve tekrar ölç. Son değerleri `brief.md`'ye yaz. Kullanıcıya plan değil, taslağı referansla yan yana göster; kalan farkları nedenleriyle yaz.
 6. Sadece işi durduran eksikleri kısa sorular olarak sor (skin, sahne, yazı, boyut).
 7. Teslimden önce `/mcthumb:check <çıktı> orders/<is>` → brief maddeleri + referansla yan yana karşılaştırma. İş bitince `status: teslim`.
 

@@ -17,6 +17,7 @@ ap.add_argument("--name", required=True)
 ap.add_argument("--time", default="")
 ap.add_argument("--icon", default="levitation", help="textures/mob_effect/<icon>.png")
 ap.add_argument("--scale", type=int, default=8)
+ap.add_argument("--width", type=int, default=120, help="kutu genişliği (taban px). Oyunda 120; 0 = yazıya göre (thumbnail'larda sık)")
 ap.add_argument("-o", "--out", required=True)
 a = ap.parse_args()
 
@@ -65,7 +66,7 @@ def draw_text(canvas, s, x, y, rgb):
             cx += adv
 
 # --- kutu: effect_background (nine-slice, kenar 4), ikon 18x18, yazı x=28 ---
-W = max(120, 28 + max(text_width(a.name), text_width(a.time)) + 7)
+W = max(a.width, 28 + max(text_width(a.name), text_width(a.time)) + 7)
 H = 32
 bg = img("gui/sprites/container/inventory/effect_background.png"); b = 4
 box = Image.new("RGBA", (W, H))

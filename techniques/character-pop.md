@@ -33,7 +33,8 @@ Referansta karakter kenarı 3 katman. Değerler 1280'lik referanstan ölçüldü
 | **Kontur** | ~3,5–4 px, mavimsi beyaz (~#F5FBFF) | ~2 px, nesnenin rengine çalan açık renk |
 | Kenarın **içi** | ışık tarafında (sol-üst) ~3 px sıcak beyaz şerit, gölge tarafında (sağ-alt) ~3 px %10–20 koyulaşma | hafif |
 - Kod: `tools/thumbkit.py` → `outline()` (varsayılanlar bu ölçümler). Işık/gölge tarafı kenarın baktığı yönden hesaplanır, NMS'ten değil.
-- Ölçüm yöntemi: kenara dik bir piksel satırı boyunca RGB değerlerini oku; uzaktaki arka plan rengiyle karşılaştır.
+- Ölçüm yöntemi: kenara dik bir piksel satırı boyunca RGB değerlerini oku; uzaktaki arka plan rengiyle karşılaştır. Araç: `tools/compare.py --profile y,x0,x1=y,x0,x1` referans ve taslağın aynı satırını yan yana basar.
+- Kontur öncesi karakter ayarı (testte): `nms_shade` 0,30/0,14 → `ambient(glow=0.15, size=10, grad=0.06)` → `grade(sat=1.30, con=1.15)`. Ambient daha güçlü olunca (0,35) karakterler soluk ve yıkanmış göründü.
 
 ## Notlar
 - Size 0 olan beyaz Inner Shadow sert bir kenar ışığı verir. Açısını sahnedeki ışık yönüne çevir ([uyarlama](adapt-to-reference.md)).

@@ -22,6 +22,19 @@ Photoshop'a geçmeden önce Minecraft'tan **aynı kamera açısıyla**, **1920x1
 - NMS = normal map shaders, DMS = depth map shaders.
 - Oyuncular NPC başına ayrı, **şeffaf arka planlı** PNG olarak çıkar (Batch Screenshots). Anlatıcı bir yerde "no map shader" diyor; ekrandaki altyazı bunu **normal map shaders** olarak düzeltiyor.
 
+## Gelen render dosyalarını tanıma (sipariş)
+İlk testte gelenler: **2000x1125 WebP**, her karakter için 3 geçiş (shader'sız, DMS, NMS) ve bir "background only" seti. Dosyalar numaralı ve adsız gelebilir (1–14, 15–23 gibi), aynı dosya iki kez gelebilir.
+```bash
+python3 tools/catalog_renders.py orders/<is>/renders/right
+```
+- Kopyalar piksel hash'iyle atılır.
+- Geçiş türü önce dosya adından (`nms`, `dms`, `no-shader`), yoksa görüntüden: DMS gri tonludur; kalan iki renkli geçişten "birim normal oranı − doku" skoru yüksek olan NMS'tir. Tek eşik güvenilmez: balkabağı skini birim normal gibi görünebilir.
+- Aynı karakterin geçişleri aynı şeffaflık sınırını (bbox) paylaşır; şeffaflığı olmayanlar arka plandır.
+- Karakter DMS'inin ortalama grisi yakınlığı verir (beyaz = yakın): katman sırası buradan çıkar.
+- Sadece gökyüzü olan arka planın DMS'i tamamen siyahtır; o arka plana sis uygulanamaz (script uyarır).
+
+> [!note] Render'lar referanstan önce gelirse sadece katalogla; kompozisyon kararlarını referans gelince ver ([Sipariş akışı](../guides/order-workflow.md)).
+
 ## Yol A — Oyun içinde (Spare: Thumbnailing modpack + NPC Studio)
 Ayrıntılı değerler: [Spare — render kısmı](../sources/spare-clean-thumbnails-render-part.md). Özet:
 - **Modlar:** [Thumbnailing modpack](https://modrinth.com/modpack/thumbnailing) (Minecraft 1.21.11, Fabric). Ana modlar NPC Studio ve Iris. DMS 1.5 ve NMS 1.6 shader'ları: Iris > Shader Packs > *Download Shaders*.

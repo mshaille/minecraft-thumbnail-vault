@@ -9,6 +9,17 @@ Bu kural her işte, her adımda geçerlidir. "Yeterince iyi" diye teslim edilmez
 5. **İlişkileri koru:** kim kimin önünde, neye değiyor, ne neyi kapatıyor; referanstaki ilişki taslakta da aynı olmalı.
 6. **Dürüst teslim:** kalan her farkı nedeniyle birlikte açıkça yaz. Hiçbir farkı saklama, "küçük" diye geçme.
 
+## Kullanıcının çalışma tercihleri
+Ayrıntı ve gerekçeler: [Sipariş akışı](guides/order-workflow.md).
+- **Referans gelmeden tasarıma başlama.** Render'lar gelince sadece katalogla (`tools/catalog_renders.py`); kompozisyon ve efekt kararları referansla verilir.
+- Yükleme sırası genelde **sağ panel → sol panel → referans**. Dosyalar numaralı/adsız ve kopyalı gelebilir.
+- Kullanıcının çıkardığı öğeyi koyma (ör. "oku şimdilik ekleme").
+- **Oyun yazısı uydurulmaz:** resmi çeviri (dil dosyası) + oyunun kendi fontu (`tools/mc_effect_box.py`).
+- Plan değil **taslak** göster; referansla yan yana ölçerek düzelt (`tools/compare.py`).
+- Efektler referanstaki gibi: hız çizgilerinin **yönünü ve odağını ölç** (Levitation'da kadraj kenarından yakın karakterin kafasına doğru sivriliyorlardı; ters yön kullanıcıya hemen batar). UI kutusu gerekirse 3D levha, karakterin ayağının arkasında, boyutu referanstaki oyun pikseli ölçeğinden.
+- Kullanıcıyla Türkçe konuş; komut ve dosya adları İngilizce/ASCII.
+- Repoya kişisel bilgi ve müşteri verisi girmez. Commit'lerde Claude co-author satırı yok (Contributors'ta Claude görünmesin).
+
 ## Bu nedir?
 Minecraft YouTube thumbnail'lerini Photoshop/Photopea ile yapma bilgisi. Kullanıcı tutorial videolarını izletir, Claude kare kare izleyip **kesin değerleriyle** not alır. Aynı klasör üç şeydir:
 1. **Obsidian vault**: giriş notu [Home.md](Home.md).
@@ -22,17 +33,17 @@ Notlar Türkçe yazılır. Yanıtlar kullanıcının dilinde verilir.
 |---|---|
 | `techniques/` | 1 not = 1 teknik/adım, kesin ayarlarla. `order` alanı süreç sırasıdır. |
 | `styles/` | Tarz rehberi (`README.md`: karar rehberi, matris, trendler) + her tarz için bir kart (S1–S11). Sipariş önce tarz seçer. |
-| `guides/` | Konu dışı ama kritik rehberler: `pitfalls.md` (politika, telif, sipariş), `common-mistakes.md`. |
+| `guides/` | Kritik rehberler: `order-workflow.md` (uçtan uca sipariş akışı, kullanıcı tercihleri, kodla üretim tuzakları), `pitfalls.md` (politika, telif, sipariş), `common-mistakes.md`. |
 | `sources/` | 1 not = 1 tutorial video: zaman damgası → teknik notu tablosu. |
 | `references/` | Referans görsel notları, `images/`, `lessons.md`, `gallery.base`. |
 | `templates/` | Obsidian şablonları: `teknik.md`, `video-source.md`, `referans.md`. |
-| `tools/` | `analyze_reference.py` (Pillow): boyut, oran, palet, parlaklık/doygunluk, 120/168 px önizleme. `mc_effect_box.py`: oyunun kendi font/kutu/ikon dosyalarıyla efekt kutusu PNG'si (Mojang dosyaları repoya konmaz).  `thumbkit.py`: tekniklerin kodla uygulanmış hali (NMS gölge, sis, ambient, kontur, rim, temas gölgesi, hız çizgileri, 3D UI levhası, split, export). |
+| `tools/` | `analyze_reference.py` (Pillow): boyut, oran, palet, parlaklık/doygunluk, 120/168 px önizleme. `catalog_renders.py`: render geçişlerini tanır ve eşleştirir (shader'sız/DMS/NMS, bbox, yakınlık, kopyalar). `compare.py`: taslağı referansla ölçerek karşılaştırır (yan yana, büyütülmüş kesit, piksel profili, renk farkı). `mc_effect_box.py`: oyunun kendi font/kutu/ikon dosyalarıyla efekt kutusu PNG'si (Mojang dosyaları repoya konmaz). `thumbkit.py`: tekniklerin kodla uygulanmış hali (NMS gölge, renk eşleme, sis, ambient, 3 katmanlı kenar, rim, yerleşim, temas gölgesi, hız çizgileri, 3D UI levhası, split, export). |
 | `dev/` | Yol haritası, değişiklik günlüğü. |
 | `skills/minecraft-thumbnail/` | Skill giriş noktası (SKILL.md). |
 | `.claude-plugin/` | Plugin ve marketplace manifestleri. |
 | `commands/` | Plugin slash komutları: `/mcthumb:order`, `/mcthumb:ref`, `/mcthumb:check`, `/mcthumb:learn`. |
 | `assets/` | Logo ve banner (SVG kaynak + PNG). Özgün tasarım: normal-map renkli voxel küp + highlight çizgisi. |
-| `orders/` | **Sadece yerel** (gitignore). Müşteri siparişleri: `orders/YYYY-MM-DD-kisa-ad/brief.md` + `refs/`. `/mcthumb:order` oluşturur. |
+| `orders/` | **Sadece yerel** (gitignore). Müşteri siparişleri: `orders/YYYY-MM-DD-kisa-ad/brief.md` + `renders/` + `refs/` + `compose.py` + çıktılar. `/mcthumb:order` oluşturur. |
 | `local/` | **Sadece yerel** (gitignore). Videolardan alınmış ayar ekranı kareleri. Değer doğrulamak için Read ile bakılabilir. |
 
 ## Kurallar

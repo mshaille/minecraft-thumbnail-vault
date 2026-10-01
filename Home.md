@@ -48,6 +48,7 @@ Her thumbnail aynı tarzda değil. Sipariş gelince önce tarz seçilir: [Tarz r
 - [Karakteri öne çıkarma](techniques/character-pop.md) · [Yazı](techniques/text-typography.md) · [Aksiyon efektleri](techniques/action-effects.md) · [Tarz teknikleri kataloğu (taslak)](techniques/style-catalog.md)
 
 ## Rehberler
+- [Sipariş akışı](guides/order-workflow.md): uçtan uca adımlar, kullanıcının çalışma tercihleri, `compose.py` iskeleti, kodla üretim tuzakları
 - [Dikkat edilecekler](guides/pitfalls.md): YouTube politikası, Mojang kuralları, lisanslar, sipariş/teslim, en sık 10 hata
 - [Yaygın hatalar → düzeltme](guides/common-mistakes.md)
 

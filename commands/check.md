@@ -11,5 +11,5 @@ Input: $ARGUMENTS
 1. Run `python3 tools/analyze_reference.py <image> -o /tmp/thumbnail-check` (from the vault root) and read the output.
 2. Look at the image and its 168x94 and grey previews.
 3. Report: spec problems (size, ratio, file size; see `techniques/12-export.md`), then the 15-item checklist from `references/README.md` as a table, then the three most valuable fixes with links to technique notes.
-4. If an order folder is given, also check every item in its `brief.md` and compare with its `refs/` images side by side (palette, brightness, saturation, 168x94). If a reference note is given, compare with it.
+4. If an order folder is given, also check every item in its `brief.md` and compare with its `refs/` images: run `python3 tools/compare.py <ref> <image> -o /tmp/thumbnail-check/compare` with `--crop`, `--profile` and `--color` on the key spots (character edges, sky, ground, UI box), then look at `tam.png` and `kesitler.png`. Report palette, brightness, saturation, 168x94 and the measured differences. If a reference note is given, compare with it.
 Do not save anything into the vault unless the user asks. Reply in the user's language.

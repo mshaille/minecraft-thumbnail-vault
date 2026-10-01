@@ -18,6 +18,10 @@ tags: [gelistirme]
 - [ ] Tarz kartları için birer video izle: S2 sinematik (Toofzy/EmixFG "like Wemmbu"), S7 korku (Seltop), S4 split/100 days.
 - [ ] Photopea'da Satin, Selective Color, Path Blur, Polar Coordinates desteğini doğrula.
 
+- [ ] Ters normal yüzünden NMS'ten çıkmayan gölgeler (ör. pembe karakterin göğsündeki çapraz gölge) için elle gölge katmanı: thumbkit'e çokgen maskeli `hand_shadow()` ekle ([Elle gölge](../techniques/07-hand-shadows.md)).
+- [ ] Ok asset'i (referanstaki sarı kavisli ok): kullanıcı isterse eklenecek.
+- [ ] `compare.py` için otomatik kenar bulma (kesit koordinatını elle vermek yerine karakter kenarını kendisi bulsun).
+
 ## Fikirler
 - Photopea scripting ile tekrar eden adımları (ör. sis katmanı kurulumu) otomatikleştirmek.
 - Camera Raw preset'ini `.xmp` olarak dışa aktarıp vault'a koymak (kullanıcı kendi preset'ini oluşturunca).

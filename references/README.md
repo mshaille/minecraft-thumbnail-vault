@@ -57,7 +57,7 @@ Mevcut notlarda olmayan bir teknik görürse kendiliğinden not açmaz, önce sa
 | 15 | Güvenli alan | Sağ alt köşede (video süresi rozeti) önemli bir şey olmamalı. |
 | 16 | Katman sırası | Kim kimin önünde? UI kutusu ya da yazı bir karakterin **arkasında** mı (ör. ayak kutunun üstünden geçiyor)? |
 | 17 | UI öğeleri | Kutu, etiket ve ikonlar düz mü, **3D levha** mı (kalınlık, perspektif, eğim, dış kontur)? |
-| 18 | Hareket efektleri | Hız çizgileri nasıl: uzun ve düz değil; ince, iki ucu sivri, yarı saydam, karakterlerin arkasında mı? |
+| 18 | Hareket efektleri | Hız çizgileri nasıl: **hangi yöne** (odağa doğru mu, dışa mı; odak nerede), kaç tane, ne kalınlıkta ve opaklıkta, karakterlerin önünde mi arkasında mı? |
 
 Liste şu kaynaklardan derlendi:
 - thumbnailcreator.com — thumbnail composition guide

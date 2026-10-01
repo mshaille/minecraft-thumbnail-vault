@@ -16,3 +16,7 @@ tags: [gelistirme]
 - İlk gerçek test (split sipariş): `tools/mc_effect_box.py` eklendi (oyunun kendi fontu/kutusu/ikonuyla efekt kutusu; resmi Türkçe ad dil dosyasından). Sipariş şablonuna render listesi bölümü eklendi.
 - Testten sonra: `tools/thumbkit.py` (teknikler kod olarak) eklendi; `/mcthumb:order` artık plan + gerçek taslak üretiyor ve referansla yan yana kontrol ediyor. Analiz listesi 18 maddeye çıktı (karakter etrafı, katman sırası, 3D UI, hız çizgisi stili).
 - KURAL eklendi: ÜŞENGEÇLİK YOK — mükemmellik aranır (AGENTS, SKILL, tüm komutlar). thumbkit: `outline()` (ölçülmüş 3 katmanlı kenar), `remap()` (ölçülen renklerle eşleme), `place_fit()` (referans konum/boyutuna yerleşim).
+- Öğrenilenler işlendi: [Sipariş akışı](../guides/order-workflow.md) rehberi (kullanıcının çalışma tercihleri, uçtan uca adımlar, `compose.py` iskeleti, kodla üretim tuzakları). AGENTS ve SKILL'e "Kullanıcının çalışma tercihleri" bölümü.
+- Yeni araçlar: `tools/catalog_renders.py` (render geçişlerini tanır/eşleştirir, kopyaları atar, siyah DMS uyarısı) ve `tools/compare.py` (taslağı referansla ölçer: yan yana, kesit, piksel profili, renk farkı).
+- thumbkit: `speed_lines` artık ölçülmüş **odak çizgileri** (kenardan odağa sivrilen üçgenler; ilk sürüm ters yönde dışa yayılıyordu). `mc_effect_box.py --width` (kutu yazıya göre daraltılabilir).
+- Teknik notlarına testte ölçülen değerler: NMS renk tablosu ve ters normal, siyah DMS ve `remap`, efekt kutusu ölçeği ve 3D levha, odak çizgileri, S4 doğrulanmış değerler.

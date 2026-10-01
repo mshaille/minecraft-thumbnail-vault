@@ -139,16 +139,22 @@ def contact_shadow(size, box, opacity=0.5, blur=14):
     m = m.filter(ImageFilter.GaussianBlur(blur)).point(lambda v: int(v * opacity))
     return Image.merge('RGBA', [Image.new('L', size, 0)] * 3 + [m])
 
-def speed_lines(size, origin, n=28, seed=7, angles=(-78, -14), r=(450, 1750), length=(220, 620), width=(2.5, 6.5), alpha=(90, 170)):
-    """Hız çizgileri: ince, iki ucu sivri, yarı saydam beyaz; karakterlerin ARKASINA."""
-    m = Image.new('L', size, 0); d = ImageDraw.Draw(m); rnd = random.Random(seed); ox, oy = origin
-    for _ in range(n):
-        a = math.radians(rnd.uniform(*angles)); r0 = rnd.uniform(*r); L = rnd.uniform(*length); w = rnd.uniform(*width)
-        ux, uy = math.cos(a), math.sin(a); px, py = -uy, ux
-        pt = lambda t: (ox + ux * (r0 + L * t), oy + uy * (r0 + L * t))
-        (x0, y0), (xm, ym), (x1, y1) = pt(0), pt(0.45), pt(1)
-        d.polygon([(x0, y0), (xm + px * w, ym + py * w), (x1, y1), (xm - px * w, ym - py * w)], fill=rnd.randint(*alpha))
-    return white(size, m.filter(ImageFilter.GaussianBlur(1.4)))
+def speed_lines(size, focus, lines, k=0.038, alpha=0.78, fade=250):
+    """Odak çizgileri (anime 'focus lines'): kadraj kenarından başlayıp ODAĞA doğru sivrilen ince beyaz üçgenler.
+    Odağın çevresi boş kalır; katman karakterlerin ve UI'nin ARKASINA konur (çizgi karakterin kenarından çıkar).
+    lines: [(açı°, r0), ...]  açı: odaktan dışa (0 = sağ, 90 = aşağı), r0: sivri ucun odağa uzaklığı (px).
+    k: genişlik artışı (px/px, ölçülen 0.035–0.045). alpha: dış uçta beyaz opaklık (ölçülen 0.6–0.8),
+    sivri uca doğru `fade` px boyunca azalır. Rastgele: [(rnd.uniform(0, 360), rnd.uniform(300, 600)) for _ in range(16)]."""
+    W, H = size; fx, fy = focus; R = math.hypot(W, H) * 1.2
+    yy, xx = np.mgrid[0:H, 0:W]; rad = np.hypot(xx - fx, yy - fy); out = np.zeros((H, W), np.float32)
+    for ang, r0 in lines:
+        ux, uy = math.cos(math.radians(ang)), math.sin(math.radians(ang)); hw = k * (R - r0) / 2
+        m = Image.new('L', size, 0)
+        ImageDraw.Draw(m).polygon([(fx + ux * r0, fy + uy * r0), (fx + ux * R - uy * hw, fy + uy * R + ux * hw),
+                                   (fx + ux * R + uy * hw, fy + uy * R - ux * hw)], fill=255)
+        ramp = np.clip((rad - r0) / fade, 0, 1) ** 0.5
+        out = np.maximum(out, A(m) * ramp)
+    return white(size, I(out * alpha).filter(ImageFilter.GaussianBlur(1.0)))
 
 def radial_glow(size, ellipse, strength=105, blur=180):
     """Gökyüzünde beyaz radyal parlama (Screen benzeri)."""

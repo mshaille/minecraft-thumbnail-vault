@@ -14,10 +14,13 @@ status: stabil
 | **Temiz arka plan** | Replay Mod'da aynı çekimi karakterli ve karaktersiz al (B tuşu) | FOV 30–50 (örnekte 34) |
 | **Zemin gölgesi** | Zemin ile karakterler arasına siyah elips. Zıplayan karakterde uzat ve yumuşat. | – |
 | **Hız çizgileri** | Anime "zoom lines" asset'i, rasterize et. Ortayı yumuşak silgiyle sil. | Eraser Hardness 0, ~618 px |
+| **Odak çizgileri (ölçülmüş)** | Kadraj kenarından başlayıp odağa doğru sivrilen ince beyaz üçgenler; odağın çevresi boş. Karakterlerin ve UI'nin **arkasında**: çizgi karakterin kenarından çıkar, kutunun altında devam eder. Kod: `thumbkit.speed_lines(size, focus, [(açı, r0), ...])`. | Levitation referansı (1280'de): odak (1040,106) = yakın karakterin kafası; 15 çizgi; sivri uç odaktan 115–450 px; genişlik artışı ~0,04 px/px (dış uçta 4–15 px); beyaz opaklık dış uçta ~%60–80, sivri uca doğru azalır |
 | **Büyü parıltısı** | Sadece zırhın kopyası olan katmana Layer Style > **Satin** | Linear Dodge (Add), magenta ~#c923f1, %57, −136°, Distance 49 px, Size 98 px, Contour Linear, Invert ✓; sonra katman opaklığını düşür |
 | **Tek rengi ayırma** | Selective Color (Absolute) | Blues: Cyan −45, Magenta −14, Yellow −38, Black −50 |
 | **Işık noktaları** | Beyaz yumuşak fırça noktaları | Blend Overlay |
 | **3D arayüz (GUI)** | Texture pack arayüzünü Nearest Neighbor ile yapıştır, Ctrl+T ile perspektif ver. Tekrarlayan kopyalar için Ctrl+T ile bir adım kaydır, sonra Ctrl+Shift+Alt+T'yi tekrarla. | – |
+
+> [!warning] Çizgilerin **yönünü** referanstan ölç. İlk testte çizgiler sol alttan dışa yayıldı; referansta odağa doğru sivriliyordu ve kullanıcı hemen fark etti. Odağı bulmak için 3–4 çizgiyi içe doğru uzat; kesiştikleri yer odaktır.
 
 ## Sıra önemli
 Zırh kopyasında önce Vibrance/Saturation/Exposure (ör. Vibrance 0, Saturation +30, Exposure +0.40), **sonra** Satin ve Selective Color uygula. Sıra tersine olunca Nebular işi baştan yapmak zorunda kaldı. Karakterin kendisinde: Vibrance +38, Saturation +50.

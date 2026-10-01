@@ -20,7 +20,7 @@ tags: [siparis]
 - **Neden bu tarz:** (brief'teki kelimeler / referanstaki ipuçları)
 
 ## Render'lar
-Render dosyalarını `renders/` altına koy (split işte `renders/left/`, `renders/right/`). Her karakter için shader'sız / DMS / NMS geçişlerini eşleştir: aynı karakterin geçişlerinde şeffaflık sınırları (bbox) birebir aynıdır. DMS gri değeri yakınlığı verir (beyaz = yakın).
+Render dosyalarını `renders/` altına koy (split işte `renders/left/`, `renders/right/`). Tabloyu `python3 tools/catalog_renders.py orders/<is>/renders/<panel>` üretir: aynı karakterin geçişleri aynı şeffaflık sınırını (bbox) paylaşır, DMS gri değeri yakınlığı verir (beyaz = yakın), kopyalar atlanır. **Referans gelene kadar sadece katalogla.**
 
 | Karakter / katman | Shader'sız | DMS (yakınlık) | NMS | Konum |
 |---|---|---|---|---|
@@ -73,4 +73,6 @@ Kurallar için bkz. [Referansa göre ayar uyarlama](../../techniques/adapt-to-re
 - [ ] `/mcthumb:check` → boyut, oran, dosya, 120/168 px okunabilirlik
 - [ ] [Dikkat edilecekler](../../guides/pitfalls.md): yanıltıcı değil, kan/küfür yok, Minecraft logosu/logo fontu yok, sağ alt köşe boş
 - [ ] İstenenlerdeki her madde var
-- [ ] Referansla yan yana karşılaştırıldı
+- [ ] Referansla yan yana karşılaştırıldı ve ölçüldü (`tools/compare.py`: tam boy, kesitler, kenar profili, renkler)
+- [ ] Son uygulanan değerler "Referanstan uyarlanan ayarlar" tablosuna yazıldı
+- [ ] Kalan farklar nedenleriyle teslim mesajında

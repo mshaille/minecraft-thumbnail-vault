@@ -46,3 +46,16 @@ checked_on: 2026-10-01
 - Hedef yaş grubu ne? Çocuk kitlesiyse daha doygun ve daha cartoon olur.
 
 **Referansta tanıma ipuçları:** görünür bir bölme çizgisi ya da panel çerçevesi · tekrar eden sayısal etiketler · sol ve sağ arasında renk ve ruh hali zıtlığı · kavisli büyük ok · üst ortada Minecraft logosu.
+
+## Doğrulanmış değerler (Levitation testi, 2026-10-01)
+"Önce → sonra" split, 2000x1125 tuval, referans 1280x720'den ölçüldü. Kod: `orders/` altındaki `compose.py` (yerel), iskelet [Sipariş akışı](../guides/order-workflow.md).
+| Öğe | Değer |
+|---|---|
+| Ayırıcı | Beyaz **10 px**, üst x = 1188, alt x = 828 (≈18° sola yatık, üstte %59, altta %41). Arkasında beyaz parlama: 46 px çizgi, blur ≈20, %55 (`split()`). |
+| Sol panel | Arka plan + karakter birlikte ×1,12, −500/−60 px. NMS gölge %22 / ışık %12, sat 1,28, kontrast 1,06, depth sis #C4DCFA (curve 0,69, uzak blur 4 px), yakın kuma sıcak denge. Kaktüse ince açık yeşil kontur (2 px, %95). |
+| Sol karakter | Kadraj yüksekliğinin ~%67'si. NMS %30/%12, ambient zayıf (0,25), kontur 2 px ve hafif renkli, dış koyu bant yok. Ayak altında temas gölgesi. |
+| Sağ panel gökyüzü | Render gökyüzü blur 2,5 → `remap` ile referans renklerine; ayırıcının sağında beyaz radyal parlama (%31, blur 170). |
+| Sağ karakterler | Her biri referanstaki merkez ve yüksekliğe `place_fit` ile: büyükler ~%45–48, uzak küçükler ~%13–17 yükseklik. NMS %30/%14, ambient 0,15, sat 1,30, kontrast 1,15, 3 katmanlı kenar (3 px mavimsi beyaz + dışta 2 px %10 koyu bant + içte ışık/gölge şeridi). |
+| Odak çizgileri | Odak yakın karakterin kafası; 15 ince beyaz üçgen kenardan içe sivrilir; karakterlerin ve kutunun arkasında ([Aksiyon efektleri](../techniques/action-effects.md)). |
+| Efekt kutusu | Oyunun fontu ve kutusuyla, genişlik 95 oyun pikseli, 9,4 px/oyun pikseli (≈ tuval genişliğinin %45'i), 3D levha, yakın karakterin ayağının **arkasında**; ayak ikonun üstüne biner ([Yazı](../techniques/text-typography.md)). |
+| Katman sırası | gökyüzü → parlama → odak çizgileri → uzak karakterler → kutu (gölgesiyle) → yakın karakterler; sol panel çapraz maskeyle en üstte, ayırıcı en üstte. |

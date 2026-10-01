@@ -13,7 +13,7 @@ Tutorial videos were watched frame by frame and every step was written down with
 - **Photopea compatibility table.** Every step was tested in Photopea. Where Photopea lacks something (Camera Raw HSL, sharpening, resample on export), a workaround is given.
 - **Reference library.** Add thumbnails you like. Claude analyzes each one: dominant palette, brightness and saturation, a 168x94 readability test and a 15-item composition checklist. It links what it sees to the technique notes and keeps a running "lessons learned" note.
 - **Styles.** Not every thumbnail looks the same. Eleven style cards are included: clean render, cinematic, SMP/drama, split/progression, hardcore, manhunt/PvP, horror, build showcase, drawn 2D, meme/lo-fi and Shorts. Each card says which steps stay at default, which change and which are switched off, plus the extra techniques it needs. A decision guide picks the style from the client's words or a reference image.
-- **Orders.** The usual job flow: an order comes in, the client says what they want and may attach reference images. `/mcthumb:order` creates a local order folder, picks the style, analyzes the references and adapts every setting to them, for example fog color from the reference sky, HSL boosts from its dominant colors, shadow and highlight sides from its light direction. It ends with a bottom-to-top layer plan **and an actual draft thumbnail rendered from your passes** with `tools/thumbkit.py`, checked side by side against the reference. Orders stay on your machine (`orders/` is git-ignored).
+- **Orders.** The usual job flow: an order comes in, the client says what they want and may attach reference images. `/mcthumb:order` creates a local order folder, picks the style, analyzes the references and adapts every setting to them, for example fog color from the reference sky, HSL boosts from its dominant colors, shadow and highlight sides from its light direction. It ends with a bottom-to-top layer plan **and an actual draft thumbnail rendered from your passes** with `tools/thumbkit.py`, measured against the reference with `tools/compare.py` (side by side, zoomed crops, pixel profiles, colour differences) and fixed until it matches. Renders that arrive before the reference are only catalogued (`tools/catalog_renders.py` pairs the no-shader, depth and normal passes per character, even from unnamed numbered files). Orders stay on your machine (`orders/` is git-ignored). The full pipeline is in [guides/order-workflow.md](guides/order-workflow.md).
 - **Thumbnail check.** Claude checks a finished image against current YouTube limits (3840x2160 recommended, 50 MB from desktop) and the checklist.
 - **Grows over time.** `/mcthumb:learn` adds a new tutorial video to the vault, following the rules in [AGENTS.md](AGENTS.md).
 
@@ -21,7 +21,7 @@ Tutorial videos were watched frame by frame and every step was written down with
 | Command | What it does |
 |---|---|
 | `/mcthumb:ref <image>` | Add an image to the reference library and analyze it |
-| `/mcthumb:order <request> [reference images]` | Take an order: what is wanted plus optional reference images. Builds a plan with settings adapted to the references. |
+| `/mcthumb:order <request> [reference images]` | Take an order: what is wanted plus optional reference images. Picks the style, adapts settings to the references, renders a real draft and measures it against the reference. |
 | `/mcthumb:check <image> [order]` | Check a finished thumbnail against YouTube specs, the checklist and the order |
 | `/mcthumb:learn <url>` | Watch a tutorial and add its techniques to the vault |
 
@@ -42,7 +42,7 @@ ln -s "$PWD/minecraft-thumbnail-vault" ~/.claude/skills/mcthumb
 
 **As an Obsidian vault:** open the folder with *Open folder as vault*. Start at [Home.md](Home.md). The reference gallery is `references/gallery.base`, which needs Bases (Obsidian 1.9+).
 
-**Reference analysis tool:** needs Python 3 and Pillow (`pip install pillow`).
+**Tools:** need Python 3 with Pillow and NumPy (`pip install pillow numpy`).
 ```bash
 python3 tools/analyze_reference.py path/to/thumbnail.png -o /tmp/previews
 ```
@@ -52,10 +52,10 @@ python3 tools/analyze_reference.py path/to/thumbnail.png -o /tmp/previews
 |---|---|
 | [techniques/](techniques/) | One note per technique, with exact settings and the Photopea table |
 | [styles/](styles/README.md) | Style guide: decision guide, style × technique matrix, trends and 11 style cards |
-| [guides/](guides/) | Pitfalls (YouTube policy, Mojang rules, licences, commission practice) and common mistakes |
+| [guides/](guides/) | Order workflow (end to end, with a `compose.py` skeleton), pitfalls (YouTube policy, Mojang rules, licences, commission practice) and common mistakes |
 | [sources/](sources/) | One note per tutorial video, mapping each timestamp to a technique |
 | [references/](references/README.md) | Reference images, the 15-item checklist and lessons learned |
-| [tools/](tools/) | `analyze_reference.py` (reference analysis), `thumbkit.py` (the techniques as code: NMS shading, depth fog, ambient light, outline, rim highlights, contact shadow, speed lines, 3D UI slab, split divider, export) and `mc_effect_box.py` (renders the in-game effect box, e.g. "Levitation X / 00:21", from your own installed game's font and UI files; no Mojang files are shipped) |
+| [tools/](tools/) | `analyze_reference.py` (reference analysis), `catalog_renders.py` (identifies and pairs render passes), `compare.py` (measures a draft against the reference), `thumbkit.py` (the techniques as code: NMS shading, colour remap, depth fog, ambient light, measured 3-layer outline, rim highlights, reference-fit placement, contact shadow, speed lines, 3D UI slab, split divider, export) and `mc_effect_box.py` (renders the in-game effect box, e.g. "Levitation X / 00:21", from your own installed game's font and UI files; no Mojang files are shipped) |
 | [templates/](templates/) | Obsidian templates for techniques, sources and references |
 | [skills/](skills/minecraft-thumbnail/SKILL.md) · [commands/](commands/) · [.claude-plugin/](.claude-plugin/) | Plugin files |
 | [AGENTS.md](AGENTS.md) | Conventions for AI sessions that extend the vault |
