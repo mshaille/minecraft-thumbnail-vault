@@ -15,6 +15,7 @@ Skill'in "hafızası" bu not. Her referans eklendiğinde tekrar eden kalıplar b
   - Sağ panelde ince ve sivri hız çizgileri, ayırıcının yanında beyaz parlama. Sol arka plan hafif bulanık ve sisli.
 
 ## Testten dersler
+- Kural: **ÜŞENGEÇLİK YOK.** İlk kenar denemesi tek bir beyaz çizgiydi. Ölçünce kenarın 3 katman olduğu çıktı (dış koyu bant, mavimsi beyaz kontur, içte ışık/gölge şeridi). Ayrıca karakterler fazla soluktu, gökyüzü referanstan çok açıktı, kutu küçüktü ve karakterler yanlış yerdeydi. Hepsi **ölçülerek** düzeltildi: `remap` ile renk eşleme, `place_fit` ile referans konumu, `outline` ile kenar.
 - Plan çıkarıp bırakmak yetmez. Render varsa taslağı `tools/thumbkit.py` ile üret ve referansla yan yana kontrol et.
 - Analizde ilk bakışta kaçanlar: karakterlerin etrafı (kontur), katman sırası, UI'nin düz mü 3D mi olduğu, hız çizgilerinin stili.
 

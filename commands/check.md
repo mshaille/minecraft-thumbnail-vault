@@ -2,6 +2,8 @@
 description: Check a finished thumbnail against current YouTube specs and the 15-item checklist
 argument-hint: <image path> [order folder or reference note to compare with]
 ---
+**Rule: no laziness — aim for perfection.** Measure every element of the reference at ≥5× zoom with pixel profiles (stroke width/colour, inside/outside of edges, glow, shadow, colours, positions and sizes). Check every layer of an effect, not just the obvious one. Never stop at a plan; render the real draft, compare it side by side with the reference at full size and zoomed, re-measure, fix and re-render until it matches. Report every remaining difference honestly.
+
 Use the `minecraft-thumbnail` skill.
 
 Input: $ARGUMENTS

@@ -25,6 +25,16 @@ status: stabil
 | Gradient Overlay | Overlay %52, siyahtan beyaza, Linear, 90°, Scale %150 |
 | Inner Glow | Overlay %76, beyaz, Softer, Edge, Size **32 px** |
 
+## Ölçülmüş kenar profili (Levitation split referansı, 2026-10-01)
+Referansta karakter kenarı 3 katman. Değerler 1280'lik referanstan ölçüldü, 2000 px'e çevrildi:
+| Katman | Sağ panel (açık gökyüzü önünde) | Sol panel (bulanık arka plan önünde) |
+|---|---|---|
+| Konturun **dışı** | 1–2 px koyu bant, ~%8–10 (konturu açık gökyüzünden ayırır) | belirgin değil |
+| **Kontur** | ~3,5–4 px, mavimsi beyaz (~#F5FBFF) | ~2 px, nesnenin rengine çalan açık renk |
+| Kenarın **içi** | ışık tarafında (sol-üst) ~3 px sıcak beyaz şerit, gölge tarafında (sağ-alt) ~3 px %10–20 koyulaşma | hafif |
+- Kod: `tools/thumbkit.py` → `outline()` (varsayılanlar bu ölçümler). Işık/gölge tarafı kenarın baktığı yönden hesaplanır, NMS'ten değil.
+- Ölçüm yöntemi: kenara dik bir piksel satırı boyunca RGB değerlerini oku; uzaktaki arka plan rengiyle karşılaştır.
+
 ## Notlar
 - Size 0 olan beyaz Inner Shadow sert bir kenar ışığı verir. Açısını sahnedeki ışık yönüne çevir ([uyarlama](adapt-to-reference.md)).
 - Karakterin yüzüne ifade eklerken yüzü göz hizasından ağıza kadar oturt. Kafayla birlikte eğ, esnetme. 2D ve 3D öğelerin stili tutarlı olsun (Bakshh GFX tavsiyesi).

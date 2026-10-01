@@ -1,5 +1,14 @@
 # AGENTS.md — bu vault'ta çalışan yapay zekâ oturumları için
 
+## ⚠️ KURAL: ÜŞENGEÇLİK YOK — mükemmellik aranır
+Bu kural her işte, her adımda geçerlidir. "Yeterince iyi" diye teslim edilmez.
+1. **Gözle tahmin yok, ölç:** referanstaki her öğeyi en az 5 kat büyüterek incele ve piksel profilleriyle **sayısal ölç**: kontur kalınlığı ve rengi, kenarın içi/dışı, parlama, gölge, renkler (gökyüzü, zemin, karakter), konum ve boyut (bbox merkezi/yüksekliği).
+2. **Bir efektin bütün katmanlarına bak:** örneğin karakter kenarı tek bir beyaz çizgi değildir. Konturun dışı, konturun kendisi ve kenarın içi ayrı ayrı kontrol edilir; ışık ve gölge tarafları da ayrı ayrı.
+3. **Plan yetmez:** render varsa gerçek taslak üretilir (`tools/thumbkit.py`).
+4. **Yan yana doğrula:** taslağı referansla tam boyutta ve büyütülmüş kesitlerde yan yana koy, aynı noktaları tekrar ölç. Fark varsa düzelt, tekrar üret. Ölçümler ve görünüm tutana kadar devam et.
+5. **İlişkileri koru:** kim kimin önünde, neye değiyor, ne neyi kapatıyor; referanstaki ilişki taslakta da aynı olmalı.
+6. **Dürüst teslim:** kalan her farkı nedeniyle birlikte açıkça yaz. Hiçbir farkı saklama, "küçük" diye geçme.
+
 ## Bu nedir?
 Minecraft YouTube thumbnail'lerini Photoshop/Photopea ile yapma bilgisi. Kullanıcı tutorial videolarını izletir, Claude kare kare izleyip **kesin değerleriyle** not alır. Aynı klasör üç şeydir:
 1. **Obsidian vault**: giriş notu [Home.md](Home.md).

@@ -34,6 +34,13 @@ def grade(im, sat=1.12, con=1.08, bri=1.0):
         rgb = f(rgb).enhance(k)
     out = rgb.convert('RGBA'); out.putalpha(a); return out
 
+def remap(im, src_a, dst_a, src_b, dst_b):
+    """Referansa renk eşleme: iki ölçülmüş renk çifti (ör. gökyüzü zemini, bulut) ile kanal başına doğrusal eşleme."""
+    b = A(im); sa, da, sb, db = (np.array(c) / 255 for c in (src_a, dst_a, src_b, dst_b))
+    den = sb - sa; k = np.where(np.abs(den) > 1e-3, (db - da) / np.where(np.abs(den) > 1e-3, den, 1), 1.0)
+    b[..., :3] = da + (b[..., :3] - sa) * k
+    return I(np.clip(b, 0, 1))
+
 def depth_fog(bg, dms, color, curve=0.69, blur=4, geo_max=0.55, sky_max=0.30):
     """04 depth sis (+ uzak bulanıklık). dms: 0..1 dizi (1 yakın). curve=0.69 ≈ Curves 86→120."""
     fog = np.clip(1 - dms, 0, 1) ** curve
@@ -72,6 +79,41 @@ def stroke(im, px, alpha=1.0):
     a = im.getchannel('A').filter(ImageFilter.MaxFilter(2 * px + 1)).filter(ImageFilter.GaussianBlur(0.7))
     s = white(im.size, a.point(lambda v: int(v * alpha))); s.alpha_composite(im); return s
 
+def edge_sides(alpha, light=(-0.6, -0.8), sigma=2.0):
+    """Kenarın baktığı yöne göre (ekran uzayı) ışık/gölge tarafı. light: ışığın geldiği yön (x sağ+, y aşağı+).
+    NMS'e bağlı değil; oyuncu dış katmanındaki ters normaller kenarı bozmaz."""
+    a = A(Image.fromarray((alpha * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(sigma)))
+    gy, gx = np.gradient(a); n = np.hypot(gx, gy) + 1e-6
+    dot = (-gx / n) * light[0] + (-gy / n) * light[1]          # dışa bakan normal · ışık
+    return np.clip(dot, 0, 1), np.clip(-dot, 0, 1)
+
+def outline(im, stroke_px=3, stroke_rgb=(245, 251, 255), tint=0.0, outer_px=2, outer_alpha=0.10,
+            outer_rgb=(25, 35, 70), inner_px=3, inner_light=0.80, inner_dark=0.18, light=(-0.6, -0.8)):
+    """Referanstan ölçülen kenar işlemi (3 katman, dıştan içe):
+    1) konturun DIŞINDA ince koyu bant (açık gökyüzünde konturu tanımlar),
+    2) mavimsi beyaz kontur (tint>0: nesnenin kenar rengine doğru karıştır),
+    3) kenarın İÇİNDE: ışık tarafında sıcak beyaz şerit, gölge tarafında koyulaşma."""
+    b = A(im); a = b[..., 3]
+    er = A(im.getchannel('A').filter(ImageFilter.MinFilter(2 * inner_px + 1)))
+    band = A(I(np.clip(a - er, 0, 1)).filter(ImageFilter.GaussianBlur(0.8))) * a
+    lit, shade = edge_sides(a, light)
+    lit, shade = A(I(lit).filter(ImageFilter.GaussianBlur(1.5))), A(I(shade).filter(ImageFilter.GaussianBlur(1.5)))
+    rgb = b[..., :3] * (1 - inner_dark * (band * shade)[..., None])
+    warm = np.array([1.0, 0.95, 0.90])
+    rgb = rgb + (warm - rgb) * (inner_light * band * lit)[..., None]
+    b[..., :3] = np.clip(rgb, 0, 1); body = I(b)
+    sc = np.array(stroke_rgb) / 255
+    if tint:                                                       # kenar rengini konturun içine taşı
+        edge_col = (b[..., :3] * band[..., None]).sum((0, 1)) / max(band.sum(), 1)
+        sc = sc * (1 - tint) + edge_col * tint
+    sa = im.getchannel('A').filter(ImageFilter.MaxFilter(2 * stroke_px + 1)).filter(ImageFilter.GaussianBlur(0.6))
+    out = Image.new('RGBA', im.size)
+    if outer_alpha:
+        oa = im.getchannel('A').filter(ImageFilter.MaxFilter(2 * (stroke_px + outer_px) + 1)).filter(ImageFilter.GaussianBlur(1.0))
+        o = Image.new('RGBA', im.size, tuple(outer_rgb) + (0,)); o.putalpha(oa.point(lambda v: int(v * outer_alpha))); out.alpha_composite(o)
+    s = Image.new('RGBA', im.size, tuple(int(v * 255) for v in sc) + (0,)); s.putalpha(sa); out.alpha_composite(s)
+    out.alpha_composite(body); return out
+
 def ring(mask, px=4):
     """Bir maskenin (ör. kaktüs) dış çevresi — arka plandaki nesneye kontur için."""
     m = np.asarray(mask.filter(ImageFilter.MaxFilter(2 * px + 1))).astype(int) - np.asarray(mask)
@@ -83,6 +125,13 @@ def place(canvas, im, s, dx, dy, cx=None, cy=None):
     im2 = im.resize((round(im.width * s), round(im.height * s)), Image.LANCZOS)
     tmp = Image.new('RGBA', canvas.size); tmp.paste(im2, (round(cx - cx * s + dx), round(cy - cy * s + dy)))
     canvas.alpha_composite(tmp)
+
+def place_fit(canvas, im, center, height):
+    """Katmanı, referanstan ölçülen hedef merkeze ve yüksekliğe oturt (karakter bazlı yerleşim)."""
+    bb = im.getchannel('A').getbbox(); c = im.crop(bb); s = height / c.height
+    c = c.resize((max(1, round(c.width * s)), max(1, round(c.height * s))), Image.LANCZOS)
+    tmp = Image.new('RGBA', canvas.size); tmp.paste(c, (round(center[0] - c.width / 2), round(center[1] - c.height / 2)))
+    canvas.alpha_composite(tmp); return (round(center[0] - c.width / 2), round(center[1] - c.height / 2), round(center[0] + c.width / 2), round(center[1] + c.height / 2))
 
 def contact_shadow(size, box, opacity=0.5, blur=14):
     """07 Temas gölgesi: ayakların altına yumuşak siyah elips. box=(x0,y0,x1,y1)."""
