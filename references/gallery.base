@@ -1,0 +1,21 @@
+filters:
+  and:
+    - file.inFolder("references")
+    - 'type == "referans"'
+views:
+  - type: cards
+    name: Galeri
+    image: note.gorsel
+    order:
+      - file.name
+      - puan
+      - durum
+      - ogrenilecek
+  - type: table
+    name: Tablo
+    order:
+      - file.name
+      - kaynak
+      - puan
+      - durum
+      - tags

@@ -1,0 +1,16 @@
+{
+  "name": "mcthumb",
+  "owner": {
+    "name": "mshaille"
+  },
+  "metadata": {
+    "description": "Minecraft YouTube thumbnail plugin for Claude Code (Photoshop/Photopea workflow + reference library)."
+  },
+  "plugins": [
+    {
+      "name": "mcthumb",
+      "source": "./",
+      "description": "Minecraft YouTube thumbnails in Photoshop/Photopea: exact-settings workflow, reference library, planning and checks."
+    }
+  ]
+}
