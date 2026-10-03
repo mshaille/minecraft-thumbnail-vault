@@ -63,3 +63,13 @@ Referans: solda yakın plan karakter (kesik), sağda 5 kişilik zırhlı klan + 
 | Işıyan trim | hale 1/2/4/6/8 px: %62/44/26/17/10 | `thumbkit.bloom` varsayılanı ([09 Glow](../techniques/09-glow.md)) |
 | Ghast | yüz L 177, kontur yok | ×0,70 |
 | Işık kaynağı | sağ üst köşe L 78, ~50 px geniş hale | lav ×1,9 + bloom σ 3/22/70 |
+
+**Sinematik geçiş (kullanıcı: "ortam çok düz, normal resimden ayıran bir şey yok").** Referans ölçülerine eşlenmiş ilk taslak düz bulundu. Eklenenler (değerler 1280 px'e göre, `thumbkit`):
+| Katman | Değer |
+|---|---|
+| N3 alan derinliği | odak klan (DMS 0,94), uzak 0,45'te σ 3,5 px; 5 px'te Nether dokusu kayboldu. Klandan yakın kökler σ 3,5 px bulanık katman olarak üstte. Ghast'lar σ 0,6 px. |
+| Lav kenar ışığı | klan ve ghast'larda lava bakan kenarlar (ışık sağ üstten), ~3 px şerit, yüzey × (1 + lav rengi × 1,4) |
+| N7 huzme | lav + parlak sağ arka plan, zoom 0,9, Screen × lav rengi × 1,2; karakterlerden önce |
+| N9 partikül | 150 kızıl/turuncu spor (0,8–2,2 px, %35'i lava yakın) + 9 bokeh (9–18 px, %10–22, blur 3) |
+| N15 grading | gölge ×(0,88; 1,0; 1,14), ışık ×(1,07; 1,0; 0,88) |
+| N5 vinyet | %38, yakın plan kahraman muaf |

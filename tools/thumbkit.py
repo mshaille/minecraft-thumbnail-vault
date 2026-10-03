@@ -79,6 +79,45 @@ def bloom(rgb, emit, k=1.0, layers=((1.5, 0.55), (5.5, 1.5), (14, 0.55))):
               for s, amp in layers)
     return screen(rgb, add)
 
+def gblur(a, s):
+    """Gauss bulanıklık, 0..1 dizi (H×W ya da H×W×3)."""
+    if a.ndim == 3: return np.dstack([gblur(a[..., c], s) for c in range(a.shape[2])])
+    return A(Image.fromarray((np.clip(a, 0, 1) * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(s)))
+
+def dof(rgb, dms, focus, far=0.3, sigma=6.0):
+    """N3 alan derinliği: odak düzleminin (DMS değeri) gerisi uzaklıkla artan Gauss. dms: 0..1 (1 yakın)."""
+    w = np.clip((focus - dms) / max(focus - far, 1e-3), 0, 1)[..., None]
+    b1, b2 = gblur(rgb, sigma * 0.4), gblur(rgb, sigma)
+    return np.where(w < 0.5, rgb * (1 - 2 * w) + b1 * 2 * w, b1 * (2 - 2 * w) + b2 * (2 * w - 1))
+
+def god_rays(src, center, length=0.5, steps=24):
+    """N7 ışık huzmesi: parlak bölgenin (0..1 maske) merkezden dışa zoom bulanığı (Radial Blur > Zoom karşılığı)."""
+    im = Image.fromarray((np.clip(src, 0, 1) * 255).astype(np.uint8)); cx, cy = center; acc = np.zeros(src.shape, np.float32)
+    for s in np.linspace(1, 1 + length, steps):
+        acc += A(im.transform(im.size, Image.AFFINE, (1 / s, 0, cx - cx / s, 0, 1 / s, cy - cy / s), Image.BILINEAR))
+    return acc / steps
+
+def particles(size, n, box, seed=3, r=(1, 3), colors=((255, 122, 26),), alpha=(0.5, 1.0), blur=0.6, bias=None):
+    """N9 partikül (kıvılcım, spor, kül): box içinde n nokta. bias=(x, y, güç): bu noktaya yakın daha sık."""
+    rnd = random.Random(seed); out = Image.new('RGBA', size); d = ImageDraw.Draw(out); x0, y0, x1, y1 = box
+    for _ in range(n):
+        x, y = rnd.uniform(x0, x1), rnd.uniform(y0, y1)
+        if bias and rnd.random() < bias[2]: x, y = rnd.gauss(bias[0], (x1 - x0) / 6), rnd.gauss(bias[1], (y1 - y0) / 6)
+        rr = rnd.uniform(*r); c = rnd.choice(colors)
+        d.ellipse((x - rr, y - rr, x + rr, y + rr), fill=tuple(c) + (int(255 * rnd.uniform(*alpha)),))
+    return out.filter(ImageFilter.GaussianBlur(blur)) if blur else out
+
+def vignette(rgb, strength=0.35, inner=0.55, outer=1.2):
+    """N5 vinyet (Multiply): köşeler `strength` kadar kararır."""
+    H, W = rgb.shape[:2]; yy, xx = np.mgrid[0:H, 0:W]
+    rr = np.hypot((xx - W / 2) / (W / 2), (yy - H / 2) / (H / 2))
+    t = np.clip((rr - inner) / (outer - inner), 0, 1); return rgb * (1 - strength * t * t * (3 - 2 * t))[..., None]
+
+def split_tone(rgb, shadow=(0.88, 1.0, 1.14), highlight=(1.07, 1.0, 0.88)):
+    """N15 renk grading: gölgeler soğuğa, ışıklar sıcağa (çarpımsal; siyah siyah kalır)."""
+    L = (rgb @ [0.299, 0.587, 0.114])[..., None]; ws, wh = (1 - L) ** 2, L ** 2
+    return np.clip(rgb * (1 + ws * (np.array(shadow) - 1)) * (1 + wh * (np.array(highlight) - 1)), 0, 1)
+
 def rim(im, li, width=3, strength=0.85):
     """11 Highlight: karakterin İÇİNDE, ışığa bakan kenarlarda ince beyaz çizgi."""
     b = A(im)

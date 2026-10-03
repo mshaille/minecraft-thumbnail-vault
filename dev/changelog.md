@@ -26,3 +26,4 @@ tags: [gelistirme]
 - [09 Glow](../techniques/09-glow.md): ölçülmüş **ışıyan trim** tekniği (maske, gölgesiz çekirdek, üç katmanlı hale, ortam desatürasyonu). thumbkit: `bloom()`, `screen()`; `export()` artık tam boy JPG'yi 2 MB altına sığdırıyor.
 - Yeni araçlar: `tools/zoom.py` (ızgaralı büyütülmüş kesit), `tools/glow_profile.py` (hale ölçümü, göreli çekirdek eşiği).
 - Sipariş akışı: render'ların masaüstü klasöründen gelmesi, "planı sana bırakıyorum", çoklu NPC z-buffer birleştirme, NPC'lerin dünya bloklarıyla kesik gelmesi, ışığın yüzey rengiyle çarpılması, sönük ışık kaynağı tuzakları. S2 kartına doğrulanmış değerler, uyarlama tablosuna üç satır.
+- Trim klanı revizyonları: sol karakter aydınlatıldı, trim parlaması "çok hafif"e indirildi (referansın ~%20'si), ortam "düz" bulununca sinematik geçiş eklendi. thumbkit: `gblur`, `dof`, `god_rays`, `particles`, `vignette`, `split_tone`; kataloğun N3/N5/N7/N9/N15 satırlarına kod karşılıkları.
