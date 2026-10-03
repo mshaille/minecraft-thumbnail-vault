@@ -17,6 +17,21 @@ Tutorial videos were watched frame by frame and every step was written down with
 - **Thumbnail check.** Claude checks a finished image against current YouTube limits (3840x2160 recommended, 50 MB from desktop) and the checklist.
 - **Grows over time.** `/mcthumb:learn` adds a new tutorial video to the vault, following the rules in [AGENTS.md](AGENTS.md).
 
+## Example
+Made with this plugin from in-game render passes (no-shader, depth map and normal map, 3840x2160): a cinematic "one vs the clan" thumbnail in the Nether.
+
+| Raw render passes, stacked | Final thumbnail |
+|---|---|
+| ![Raw Minecraft render passes stacked without editing](assets/examples/trim-clan-raw.jpg) | ![Final thumbnail made with the plugin](assets/examples/trim-clan.jpg) |
+
+What the plugin did:
+- **Lighting:** normal-map shading and a warm haze. The lava fall became the scene's light source, with god rays and a warm rim light on the clan.
+- **Armor trims:** they glow gently in their own color. The environment was desaturated so the trims read.
+- **The close character:** lit from the side of the light source.
+- **Atmosphere:** light depth of field, crimson spores and embers, split toning and a vignette.
+
+Every step was measured against a reference image with `tools/compare.py` and `tools/glow_profile.py`, then revised from the client's feedback: a brighter close character, subtler trims, less background blur. It was rendered at 3840x2160 by `tools/thumbkit.py`.
+
 ## Commands
 | Command | What it does |
 |---|---|
@@ -76,4 +91,4 @@ The knowledge comes from these tutorials. The notes are short summaries in our o
 ---
 
 ## Türkçe özet
-Minecraft YouTube thumbnail'lerini Photoshop/Photopea ile yapmak için kesin ayarlı, adım adım notlar. Claude Code plugin'i ve Obsidian vault'u olarak kullanılır. Referans görsel ekleme ve analiz etme, yeni thumbnail planlama ve bitmiş işi kontrol etme özellikleri vardır. Başlangıç: [Home.md](Home.md). Normal iş akışı: sipariş gelir, istenenler söylenir, istenirse referans resim verilir → `/mcthumb:order`. Diğer komutlar: `/mcthumb:ref`, `/mcthumb:check`, `/mcthumb:learn`.
+Minecraft YouTube thumbnail'lerini Photoshop/Photopea ile yapmak için kesin ayarlı, adım adım notlar. Claude Code plugin'i ve Obsidian vault'u olarak kullanılır. Referans görsel ekleme ve analiz etme, yeni thumbnail planlama ve bitmiş işi kontrol etme özellikleri vardır. Başlangıç: [Home.md](Home.md). Normal iş akışı: sipariş gelir, istenenler söylenir, istenirse referans resim verilir → `/mcthumb:order`. Örnek iş yukarıda (**Example**): ham render'lardan Nether'de "tek kişi vs klan" thumbnail'i. Diğer komutlar: `/mcthumb:ref`, `/mcthumb:check`, `/mcthumb:learn`.

@@ -9,6 +9,12 @@ tags: [index]
 
 Minecraft YouTube kapak fotoğraflarını (thumbnail) **Photoshop / Photopea** ile yapmak için öğrenilen her şey. Tutorial videolar kare kare izlenip değerleriyle birlikte not alındı. Aynı klasör hem bir Claude Code skill'i hem de GitHub reposu.
 
+## Örnek: bu plugin'le yapılan bir iş
+Ham render geçişleri (üst üste, düzenlenmemiş) → son thumbnail. Ayrıntılar: [README](README.md) → Example.
+
+![Ham render'lar](assets/examples/trim-clan-raw.jpg)
+![Son thumbnail](assets/examples/trim-clan.jpg)
+
 ## Adım adım süreç
 | # | Teknik | Kısaca |
 |---|---|---|

@@ -42,7 +42,7 @@ Notlar Türkçe yazılır. Yanıtlar kullanıcının dilinde verilir.
 | `skills/minecraft-thumbnail/` | Skill giriş noktası (SKILL.md). |
 | `.claude-plugin/` | Plugin ve marketplace manifestleri. |
 | `commands/` | Plugin slash komutları: `/mcthumb:order`, `/mcthumb:ref`, `/mcthumb:check`, `/mcthumb:learn`. |
-| `assets/` | Logo ve banner (SVG kaynak + PNG). Özgün tasarım: normal-map renkli voxel küp + highlight çizgisi. |
+| `assets/` | Logo ve banner (SVG kaynak + PNG). Özgün tasarım: normal-map renkli voxel küp + highlight çizgisi. `assets/examples/`: plugin'le yapılmış örnek işler (ham render → son görsel), README'de gösterilir. |
 | `orders/` | **Sadece yerel** (gitignore). Müşteri siparişleri: `orders/YYYY-MM-DD-kisa-ad/brief.md` + `renders/` + `refs/` + `compose.py` + çıktılar. `/mcthumb:order` oluşturur. |
 | `local/` | **Sadece yerel** (gitignore). Videolardan alınmış ayar ekranı kareleri. Değer doğrulamak için Read ile bakılabilir. |
 
@@ -69,6 +69,7 @@ Görseller en fazla ~1280x720 ve ~500 KB (JPG/WebP) olsun. Başkasının thumbna
 - `.obsidian/` içinde sadece `app.json`, `core-plugins.json`, `templates.json` repoya girer. Community plugin ekleme.
 - PSD/PSB commit'leme.
 - `local/` ve `orders/` klasörlerini commit'leme. Müşteri verisini (sipariş, skin, referans) public repoya koyma.
+- İstisna: kullanıcı **açıkça isterse** bitmiş bir işi örnek olarak `assets/examples/` altına koy (son görsel + ham render, 1920x1080 JPG, ~300 KB). Referans görseli (başkasının thumbnail'i) konmaz; oyuncu/NPC adları dosya adına ve yazıya girmez.
 
 ## Kontrol
 - `claude plugin validate .` → manifest + skill doğrulaması

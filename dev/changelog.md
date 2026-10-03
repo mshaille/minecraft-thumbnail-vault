@@ -27,3 +27,4 @@ tags: [gelistirme]
 - Yeni araçlar: `tools/zoom.py` (ızgaralı büyütülmüş kesit), `tools/glow_profile.py` (hale ölçümü, göreli çekirdek eşiği).
 - Sipariş akışı: render'ların masaüstü klasöründen gelmesi, "planı sana bırakıyorum", çoklu NPC z-buffer birleştirme, NPC'lerin dünya bloklarıyla kesik gelmesi, ışığın yüzey rengiyle çarpılması, sönük ışık kaynağı tuzakları. S2 kartına doğrulanmış değerler, uyarlama tablosuna üç satır.
 - Trim klanı revizyonları: sol karakter aydınlatıldı, trim parlaması "çok hafif"e indirildi (referansın ~%20'si), ortam "düz" bulununca sinematik geçiş eklendi. thumbkit: `gblur`, `dof`, `god_rays`, `particles`, `vignette`, `split_tone`; kataloğun N3/N5/N7/N9/N15 satırlarına kod karşılıkları.
+- Örnek iş README'ye eklendi (kullanıcı isteğiyle): `assets/examples/trim-clan-raw.jpg` → `trim-clan.jpg`.
