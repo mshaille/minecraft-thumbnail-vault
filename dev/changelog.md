@@ -20,3 +20,9 @@ tags: [gelistirme]
 - Yeni araçlar: `tools/catalog_renders.py` (render geçişlerini tanır/eşleştirir, kopyaları atar, siyah DMS uyarısı) ve `tools/compare.py` (taslağı referansla ölçer: yan yana, kesit, piksel profili, renk farkı).
 - thumbkit: `speed_lines` artık ölçülmüş **odak çizgileri** (kenardan odağa sivrilen üçgenler; ilk sürüm ters yönde dışa yayılıyordu). `mc_effect_box.py --width` (kutu yazıya göre daraltılabilir).
 - Teknik notlarına testte ölçülen değerler: NMS renk tablosu ve ters normal, siyah DMS ve `remap`, efekt kutusu ölçeği ve 3D levha, odak çizgileri, S4 doğrulanmış değerler.
+
+## 2026-10-03
+- İkinci gerçek sipariş: "Trim klanı" (S2b sinematik-karanlık + S1). Render'lar masaüstündeki bir klasörden, adlı dosyalar (3840x2160, no-shader/DMS 1.6/NMS 1.7, 10 NPC + arka plan). Teslim 4K.
+- [09 Glow](../techniques/09-glow.md): ölçülmüş **ışıyan trim** tekniği (maske, gölgesiz çekirdek, üç katmanlı hale, ortam desatürasyonu). thumbkit: `bloom()`, `screen()`; `export()` artık tam boy JPG'yi 2 MB altına sığdırıyor.
+- Yeni araçlar: `tools/zoom.py` (ızgaralı büyütülmüş kesit), `tools/glow_profile.py` (hale ölçümü, göreli çekirdek eşiği).
+- Sipariş akışı: render'ların masaüstü klasöründen gelmesi, "planı sana bırakıyorum", çoklu NPC z-buffer birleştirme, NPC'lerin dünya bloklarıyla kesik gelmesi, ışığın yüzey rengiyle çarpılması, sönük ışık kaynağı tuzakları. S2 kartına doğrulanmış değerler, uyarlama tablosuna üç satır.

@@ -51,3 +51,15 @@ checked_on: 2026-10-01
 - Kanalın sabit bir renk çifti var mı?
 
 **Referansta tanıma ipuçları:** tekrar eden yüzlerce figür ya da dev bir yapı · karakter kadraj kenarında ve kesik · sahnede tek, çok parlak bir ışık kaynağı ve onu çevreleyen sis · yazı yok · S2b'de köşeler koyu · gerçekçi gökyüzü efektleri (aurora, god-ray).
+
+## Doğrulanmış değerler (Trim klanı, S2b, 2026-10-03)
+Referans: solda yakın plan karakter (kesik), sağda 5 kişilik zırhlı klan + 2 ghast, karanlık mağara, sağ üstte limon parlama. Bu iş Nether'de yapıldı; değerler 1280 px'e göre.
+| Öğe | Ölçülen (ref) | Uygulanan |
+|---|---|---|
+| Genel | parlaklık %25, doygunluk %63 | %24 / %54 |
+| Ortam | doygunluk 0,15–0,26, uzak L 35, üst L 46 | doygunluk ×0,5, koyu sıcak pus (curve 0,8, en fazla %45) |
+| Sol yakın duvar | L 26 → kenara 30 px kala 45 → kenarda 72, ışık kaynağının renginde | ×0,27 + lav renginde kenar ışığı |
+| Sol karakter | sol V 0,45, sağ V 0,59, sağ kenarda ~40 px içe doğru artan kenar ışığı; kontur yok | ışık × yüzey rengi, kenar ışığı yüzey rengiyle çarpılır |
+| Işıyan trim | hale 1/2/4/6/8 px: %62/44/26/17/10 | `thumbkit.bloom` varsayılanı ([09 Glow](../techniques/09-glow.md)) |
+| Ghast | yüz L 177, kontur yok | ×0,70 |
+| Işık kaynağı | sağ üst köşe L 78, ~50 px geniş hale | lav ×1,9 + bloom σ 3/22/70 |

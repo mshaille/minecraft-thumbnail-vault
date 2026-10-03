@@ -38,6 +38,9 @@ Videolardaki değerler tek bir sahne için (karlı dağ, açık mavi + mor). Sip
 | Karakter boyutu ve yerleşimi | Kompozisyon ([checklist](../references/README.md)) | Referanstaki oranı (kadraj yüksekliğinin %30–50'si) ve üçte bir yerleşimini taklit et. Render'ı alırken kamerayı buna göre kur. | – |
 | Beyaz kontur / dış glow | [06 Layer Style](06-layer-style-ambient-light.md) | Referansta varsa **Stroke** ekle (4–10 px beyaz, Outside) veya Outer Glow. Videolarda yok, referanstan gelir. | – |
 | Highlight yoğunluğu | [11 Highlight](11-highlights.md) | Belirgin rim light varsa highlight katmanını Normal %100 bırak. İnce bir his isteniyorsa Overlay kullan. | Overlay |
+| Ortam desatüre, karakterler doygun | [05 Camera Raw](05-camera-raw.md), arka plan | Arka planın doygunluğunu ölç (Trim klanı ref: 0,15–0,26). Kendi arka planın çok doygunsa yarıya indir; ışıyan öğeleri önce ayır. | – |
+| Işıyan öğe (trim, büyü) + hale | [09 Glow](09-glow.md) | Halenin uzaklığa göre sönüşünü `tools/glow_profile.py` ile ölç ve eşle. Öğe kendi renginde kalır. | – |
+| Tek güçlü ışık kaynağı | [09 Glow](09-glow.md), [10 Gökyüzü](10-sky-and-assets.md) | Sahnedeki kaynağı (lav, portal) parlat ve geniş hale ver; yakın duvarın kenarına o renkte ışık sızdır. | – |
 
 ## Sonra karşılaştır
 `/mcthumb:check <çıktı> <sipariş klasörü>` → paleti, parlaklığı ve 168x94 önizlemeyi referansla yan yana koyar.

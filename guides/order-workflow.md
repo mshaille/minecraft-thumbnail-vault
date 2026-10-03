@@ -14,6 +14,8 @@ updated: 2026-10-01
 |---|---|
 | **Referans gelmeden tasarıma başlama** | Render'lar gelince sadece katalogla (hangi dosya hangi geçiş, kim nerede, kim yakın). Kompozisyon, renk ve efekt kararları referans gelince verilir. Kullanıcıya "neye başladın?" dedirtme. |
 | Yükleme sırası: **sağ panel → sol panel → referans** | Kullanıcı mesajda "sağ panel" / "sol panel" yazar. Split işte her mesaj bir panelin render'larıdır, referans en son gelir. Dosyalar numaralı ve adsız gelebilir. **Aynı dosya iki kez gelebilir**; kopyalar atılır. |
+| Render'lar masaüstündeki bir klasörde | Çok dosya olunca kullanıcı render'ları masaüstüne bir klasöre koyar (ör. `MMM`; adlar `<tarih>_<geçiş>_3840x2160_cam1_npc-<ad>-<hash>.png`, geçiş = `no-shader`, `DMS_1.6` ya da `NMS_1.7`). Dosyaları `orders/<is>/renders/` içine `<ad>-<hash4>-<geçiş>.png` adıyla kopyala, sonra katalogla. |
+| "Planı sana bırakıyorum" | Tarzı, renk kararlarını ve yerleşimi sen seç; değişen her kararı (ör. palet referanstan farklı kaldıysa) teslimde seçenek olarak yaz. |
 | Kullanıcının çıkardığı öğe konmaz | Örnek: "oku şimdilik ekleme" → ok yok. Sonra istenirse eklenir. Referanstaki her şeyi körü körüne kopyalama; brief'teki "Olmasın" listesi önce gelir. |
 | **Oyun yazısı uydurulmaz** | UI metni oyunun resmi çevirisiyle (dil dosyası) ve oyunun kendi fontuyla yazılır: [`tools/mc_effect_box.py`](../techniques/text-typography.md). Benzer bir piksel font kullanılmaz. |
 | **Plan yetmez** | Render varsa gerçek taslak üretilir ve gösterilir. Sadece katman planı vermek, kullanıcının gözünde "hiçbir şey yapmamak" demektir. |
@@ -101,5 +103,12 @@ export(canvas, 'thumbnail')
 | Ayak yazının üstüne biner | "Yü" harfleri kapanır | Kutunun ölçeğini ve genişliğini referanstan ölçünce yazı referanstaki yerine gelir ve karakter referans konumunda kalabilir. Ayak **ikonun** üstüne ve yazının hemen soluna gelsin. Sapma olursa teslimde yaz. |
 | Font dosyasını `unzip -j` ile çıkarmak | `default.json`, `include/default.json` ile ezilir | Klasör yapısını koru. `mc_effect_box.py` jar'dan doğrudan okur. |
 | Font sağlayıcısı `reference` | `default.json` içinde bitmap yok, araç hata verir | `reference` sağlayıcılarını özyinelemeli çöz (`include/space`, `include/default`, `include/unifont`). |
+| Birden çok NPC render'ı üst üste | NPC'ler birbirini doğru kesmiyor | NPC'ler tek tek render edilir, birbirini kesmez. Piksel başına en yakın DMS'i seçen z-buffer ile birleştir (Trim klanı `compose.py`). |
+| NPC'yi tek başına taşımak | Önündeki kök/ot bloklarının deliği yerinde kalmaz | NPC render'ları dünya bloklarıyla kesik gelir. Ya hiç taşıma ya da sahnenin tamamını (arka plan + bütün NPC'ler) birlikte ölçekle. |
+| Kenar ışığını beyaz eklemek | Siyah şapka ve gözlükte beyaz hale | Işık yüzey rengiyle **çarpılır**: rgb = yüzey × (anahtar ışık + kenar ışığı). Siyah yüzey ışık almaz. |
+| Işıyan öğe ortamla aynı renkte | Kırmızı trim kırmızı Nether'de kaybolur | Ortamın doygunluğunu düşür (referansta ortam 0,15–0,26, karakterler doygun). Işıyan pikselleri desatürasyondan önce ayır. |
+| Mutlak eşikle hale ölçmek | Taslaktaki parlak hale "çekirdek" sayılır, oranlar tutmaz | `tools/glow_profile.py` göreli eşik kullanır: iki görselde aynı tanım. |
+| Render'da sönük ışık kaynağı | Lav (128,48,0) gibi sönük, maske yakalamaz | Rengini tanımla (turuncu: R > 1,8 G, G > 0,2 R, B ≈ 0), ×1,9 parlat, geniş bloom ver. |
+| İkili alfa (yumuşatma yok) | 4K'da tırtıklı kenar | Görünürlük maskesini ~1 px bulanıklaştır. |
 
 İlgili: [Referansa göre uyarlama](../techniques/adapt-to-reference.md) · [Dikkat edilecekler](pitfalls.md) · [Yaygın hatalar](common-mistakes.md) · [Referanslardan öğrenilenler](../references/lessons.md)

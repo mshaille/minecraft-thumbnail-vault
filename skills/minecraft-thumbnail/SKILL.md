@@ -48,7 +48,8 @@ Vault'a yazmadan önce `AGENTS.md` dosyasını oku. Dosya adı, link ve telif ku
 | Karakteri sahneden koparma (hale + beyaz kenar) | `techniques/character-pop.md` |
 | Yazı, 3D başlık, isim etiketi, **oyun içi efekt kutusu** (`tools/mc_effect_box.py`) | `techniques/text-typography.md` |
 | **Render'lardan taslak üretme (kodla)** | `tools/thumbkit.py` (her fonksiyon bir teknik notuna karşılık gelir); iskelet `guides/order-workflow.md` |
-| **Taslağı referansla ölçerek karşılaştırma** | `tools/compare.py` (yan yana, kesit, piksel profili, renk farkı) |
+| **Taslağı referansla ölçerek karşılaştırma** | `tools/compare.py` (yan yana, kesit, piksel profili, renk farkı), `tools/zoom.py` (ızgaralı kesit), `tools/glow_profile.py` (hale ölçümü) |
+| Işıyan zırh trim'i, büyü, lav parlaması | `techniques/09-glow.md` (ölçülmüş trim halesi, `thumbkit.bloom`) |
 | Blur, hız çizgileri, zemin/ayrıştırma gölgesi, parıltı, eşya glow | `techniques/action-effects.md` |
 | Kontur, aura, vinyet, split, god rays, partikül, UI, 2D... (taslak) | `techniques/style-catalog.md` |
 | Politika, Mojang kuralları, lisans, sipariş/teslim, en sık 10 hata | `guides/pitfalls.md` |

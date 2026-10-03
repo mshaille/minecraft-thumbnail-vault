@@ -5,7 +5,7 @@ Her fonksiyon bir teknik notuna karşılık gelir; değerlerin anlamı o notlard
 
     import sys; sys.path.insert(0, 'tools'); from thumbkit import *
 """
-import math, random
+import math, os, random
 import numpy as np
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter
 
@@ -65,6 +65,19 @@ def ambient(im, color, glow=0.35, size=10, grad=0.19):
 def tint(im, color, k):
     """Uzak karakteri ortam rengine çek (sis yerine)."""
     b = A(im); b[..., :3] = b[..., :3] * (1 - k) + color * k; return I(b)
+
+def screen(base, add):
+    """Screen karışımı (0..1 diziler): ışık ekler, beyazı aşmaz."""
+    return 1 - (1 - base) * (1 - np.clip(add, 0, 1))
+
+def bloom(rgb, emit, k=1.0, layers=((1.5, 0.55), (5.5, 1.5), (14, 0.55))):
+    """09 Glow (ışıyan öğe: trim, lav, büyü). emit: yalnız ışıyan piksellerin rengi (H×W×3, 0..1), gerisi 0.
+    layers: (sigma_px @1280, şiddet). Varsayılan, Trim klanı referansından ölçüldü (tools/glow_profile.py):
+    trimden 1/2/4/6/8 px uzakta hale = çekirdek farkının ~%62/44/26/17/10'u. Büyük ışık kaynağına (lav) geniş katmanlar ekle."""
+    add = sum(np.dstack([np.asarray(Image.fromarray((np.clip(emit[..., c], 0, 1) * 255).astype(np.uint8))
+                                    .filter(ImageFilter.GaussianBlur(s * k))) / 255 for c in range(3)]) * amp
+              for s, amp in layers)
+    return screen(rgb, add)
 
 def rim(im, li, width=3, strength=0.85):
     """11 Highlight: karakterin İÇİNDE, ışığa bakan kenarlarda ince beyaz çizgi."""
@@ -191,6 +204,9 @@ def split(left, right, top_x, bottom_x, line=10, glow=46, glow_alpha=0.55):
     return out
 
 def export(img, stem):
-    """12 Export: tam boyut PNG + 1920x1080 PNG + JPG (mobil yükleme için 2 MB altı)."""
+    """12 Export: tam boyut PNG + tam boyut JPG (mobil yükleme sınırı 2 MB altına sığacak kalite) + 1920x1080 PNG/JPG."""
     rgb = img.convert('RGB'); rgb.save(f'{stem}-{img.width}x{img.height}.png')
+    for q in (92, 88, 84, 80, 75):
+        rgb.save(f'{stem}-{img.width}x{img.height}.jpg', quality=q)
+        if os.path.getsize(f'{stem}-{img.width}x{img.height}.jpg') < 2_000_000: break
     small = rgb.resize((1920, 1080), Image.LANCZOS); small.save(f'{stem}-1920x1080.png'); small.save(f'{stem}-1920x1080.jpg', quality=92)

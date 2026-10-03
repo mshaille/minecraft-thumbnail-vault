@@ -15,6 +15,13 @@ Skill'in "hafızası" bu not. Her referans eklendiğinde tekrar eden kalıplar b
   - Sağ panelde **odak çizgileri**: kadraj kenarından yakın karakterin kafasına doğru sivrilen ince beyaz üçgenler, karakterlerin arkasında. Ayırıcının yanında beyaz parlama. Sol arka plan hafif bulanık ve sisli.
   - Efekt kutusu oyundakinden dar (~96 oyun pikseli, yazıya göre) ve büyük ölçekli (6,0 px/oyun pikseli @1280).
 
+- **S2b sinematik "tek karakter vs klan" (Trim klanı, 2026-10-03):**
+  - Ortam desatüre ve karanlık, karakterler ve ışıyan trim'ler doygun. Kontur yok.
+  - Trim'ler kendi renginde parlıyor; yumuşak hale ~10 px'te sönüyor (1280'de).
+  - Solda yakın duvar koyu, kenarına sahnenin ışık renginde ışık sızıyor. Yakın karakter sağdan aydınlatılmış, sağ kenarında kenar ışığı var.
+  - Ders: ışık yüzey rengiyle çarpılır (siyah şapka ışık almaz). Işıyan öğe ortamla aynı renkteyse ortamın doygunluğunu düşür.
+  - Ders: render'larda NPC'ler dünya bloklarıyla kesik gelir; NPC'leri tek tek taşıma, birbirleriyle z-buffer ile birleştir.
+
 ## Testten dersler
 - Kural: **ÜŞENGEÇLİK YOK.** İlk kenar denemesi tek bir beyaz çizgiydi. Ölçünce kenarın 3 katman olduğu çıktı (dış koyu bant, mavimsi beyaz kontur, içte ışık/gölge şeridi). Ayrıca karakterler fazla soluktu, gökyüzü referanstan çok açıktı, kutu küçüktü ve karakterler yanlış yerdeydi. Hepsi **ölçülerek** düzeltildi: `remap` ile renk eşleme, `place_fit` ile referans konumu, `outline` ile kenar.
 - Plan çıkarıp bırakmak yetmez. Render varsa taslağı `tools/thumbkit.py` ile üret ve referansla `tools/compare.py` ile ölçerek kontrol et.
