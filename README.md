@@ -30,7 +30,7 @@ What the plugin did:
 - **The close character:** lit from the side of the light source.
 - **Atmosphere:** light depth of field, crimson spores and embers, split toning and a vignette.
 
-Every step was measured against a reference image with `tools/compare.py` and `tools/glow_profile.py`, then revised from the client's feedback: a brighter close character, subtler trims, less background blur. It was rendered at 3840x2160 by `tools/thumbkit.py`.
+Every step was measured against a reference image with `tools/compare.py` and `tools/glow_profile.py`, then revised from the client's feedback: a brighter close character, subtler trims, less background blur, and one clan member re-rendered with a new skin. It was rendered at 3840x2160 by `tools/thumbkit.py`.
 
 ## Commands
 | Command | What it does |
