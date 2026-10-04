@@ -34,3 +34,4 @@ tags: [gelistirme]
 - Plugin hook'u `hooks/rule.py` (UserPromptSubmit): thumbnail ile ilgili mesajlarda kural ve kullanıcı tercihleri otomatik eklenir.
 - `catalog_renders.py`: bütün karakter geçişlerinde ortak nesneyi bulur, uyarır ve bbox'lardan çıkarır.
 - thumbkit: `gradient_map` (altın/metal rampası), `sparkles` (dört kollu parıltı). [09 Glow](../techniques/09-glow.md): ölçülmüş altın/metal nesne tekniği.
+- Kupa revizyonu: karakterler kupanın ışığıyla aydınlatıldı (normal · ışık yönü, ışık düşüşü, yer gölgesi); kural/hook metnine "karakterler sahnenin ışığına uysun" eklendi.

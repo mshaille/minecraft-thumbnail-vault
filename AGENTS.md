@@ -13,7 +13,7 @@ Bu kural her işte, her adımda geçerlidir. "Yeterince iyi" diye teslim edilmez
 Ayrıntı ve gerekçeler: [Sipariş akışı](guides/order-workflow.md).
 - **Kural otomatik:** plugin'in `hooks/rule.py` hook'u, thumbnail ile ilgili her mesajda bu kuralı ve tercihleri bağlama ekler. Kullanıcı kuralı tekrar yazmak zorunda değil; yazmasa da geçerli.
 - **Referans gelecekse gelmeden tasarıma başlama.** Render'lar gelince sadece katalogla (`tools/catalog_renders.py`). Referans **yoksa** ve "plan sende" denirse tarzı ve planı sen kur, aşağıdaki varsayılanlarla başla.
-- **Varsayılanlar (kullanıcının önceki geri bildirimlerinden):** yakın/ana karakterler aydınlık; parlamalar hafif (trim ~referansın %20'si); arka plan bulanıklığı hafif (σ ~1,5 px @1280); ortam düz kalmasın (alan derinliği, ışık kaynağı, partikül, grading, vinyet).
+- **Varsayılanlar (kullanıcının önceki geri bildirimlerinden):** karakterler sahnenin ışığına uyar (ışık kaynağına bakan taraf aydınlık, arkası gölge, kaynaktan uzaklaştıkça kararır; karakter/zemin parlaklık oranı ~1,5–1,8); tek yakın plan kahraman karanlık bırakılmaz; parlamalar hafif (trim ~referansın %20'si); arka plan bulanıklığı hafif (σ ~1,5 px @1280); ortam düz kalmasın (alan derinliği, ışık kaynağı, partikül, grading, vinyet).
 - Render'lar masaüstündeki bir klasörde gelir; 4K orijinaller Modrinth profilinin `screenshots` klasöründedir. Uygulamanın ayıramadığı nesne (ör. kupa) bütün karakter geçişlerinde ortak çıkar: kendin ayır.
 - Yükleme sırası genelde **sağ panel → sol panel → referans**. Dosyalar numaralı/adsız ve kopyalı gelebilir.
 - Kullanıcının çıkardığı öğeyi koyma (ör. "oku şimdilik ekleme").

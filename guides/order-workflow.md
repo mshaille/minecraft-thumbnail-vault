@@ -114,6 +114,7 @@ export(canvas, 'thumbnail')
 | Mutlak eşikle hale ölçmek | Taslaktaki parlak hale "çekirdek" sayılır, oranlar tutmaz | `tools/glow_profile.py` göreli eşik kullanır: iki görselde aynı tanım. |
 | Render'da sönük ışık kaynağı | Lav (128,48,0) gibi sönük, maske yakalamaz | Rengini tanımla (turuncu: R > 1,8 G, G > 0,2 R, B ≈ 0), ×1,9 parlat, geniş bloom ver. |
 | İkili alfa (yumuşatma yok) | 4K'da tırtıklı kenar | Görünürlük maskesini ~1 px bulanıklaştır. |
+| Karakterler sahneden kopuk, fazla aydınlık | Kullanıcı: "karakterler arka plana göre çok aydınlık"; ölçüm: karakter/zemin 2,8×, ışıktan uzakta 5× | Sahnede ışık kaynağı varsa karakterleri **o kaynakla** aydınlat: piksel başına NMS normali · kaynağa yön (ışık tarafı sıcak, gölge tarafı serin), odadaki ışık düşüşünü karakterlere de uygula, yere kaynaktan dışa gölge düşür. Hedef oran ~1,5–1,8. Ters dış katman normali: kameraya bakmayan normali çevir. |
 | Render'da metal yüzler düz | Altın kupa tek renk sarı leke gibi, hale silüeti yutar | Yüzleri NMS yönüne göre elle gölgele (üst ×1,25, ön ×0,82, yan ×0,55), `gradient_map` ile altın rampası; haleyi yalnız parlak yüzlerden çıkar ([09 Glow](../techniques/09-glow.md)). |
 | Kenar ışığı skin'in iç boşluklarına uygulanır | Dış katman ile kol arasında ince parlak çizgiler | Kenar ışığını boşlukları kapatılmış silüete uygula (`blur(alfa) > 0,35`). Çizgi kalırsa **önce ham render'a bak**: skin'in kendi detayı olabilir (Kupa işinde bileklik). |
 
