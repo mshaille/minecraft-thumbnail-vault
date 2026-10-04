@@ -11,7 +11,10 @@ Bu kural her işte, her adımda geçerlidir. "Yeterince iyi" diye teslim edilmez
 
 ## Kullanıcının çalışma tercihleri
 Ayrıntı ve gerekçeler: [Sipariş akışı](guides/order-workflow.md).
-- **Referans gelmeden tasarıma başlama.** Render'lar gelince sadece katalogla (`tools/catalog_renders.py`); kompozisyon ve efekt kararları referansla verilir.
+- **Kural otomatik:** plugin'in `hooks/rule.py` hook'u, thumbnail ile ilgili her mesajda bu kuralı ve tercihleri bağlama ekler. Kullanıcı kuralı tekrar yazmak zorunda değil; yazmasa da geçerli.
+- **Referans gelecekse gelmeden tasarıma başlama.** Render'lar gelince sadece katalogla (`tools/catalog_renders.py`). Referans **yoksa** ve "plan sende" denirse tarzı ve planı sen kur, aşağıdaki varsayılanlarla başla.
+- **Varsayılanlar (kullanıcının önceki geri bildirimlerinden):** yakın/ana karakterler aydınlık; parlamalar hafif (trim ~referansın %20'si); arka plan bulanıklığı hafif (σ ~1,5 px @1280); ortam düz kalmasın (alan derinliği, ışık kaynağı, partikül, grading, vinyet).
+- Render'lar masaüstündeki bir klasörde gelir; 4K orijinaller Modrinth profilinin `screenshots` klasöründedir. Uygulamanın ayıramadığı nesne (ör. kupa) bütün karakter geçişlerinde ortak çıkar: kendin ayır.
 - Yükleme sırası genelde **sağ panel → sol panel → referans**. Dosyalar numaralı/adsız ve kopyalı gelebilir.
 - Kullanıcının çıkardığı öğeyi koyma (ör. "oku şimdilik ekleme").
 - **Oyun yazısı uydurulmaz:** resmi çeviri (dil dosyası) + oyunun kendi fontu (`tools/mc_effect_box.py`).
@@ -37,10 +40,11 @@ Notlar Türkçe yazılır. Yanıtlar kullanıcının dilinde verilir.
 | `sources/` | 1 not = 1 tutorial video: zaman damgası → teknik notu tablosu. |
 | `references/` | Referans görsel notları, `images/`, `lessons.md`, `gallery.base`. |
 | `templates/` | Obsidian şablonları: `teknik.md`, `video-source.md`, `referans.md`. |
-| `tools/` | `analyze_reference.py` (Pillow): boyut, oran, palet, parlaklık/doygunluk, 120/168 px önizleme. `catalog_renders.py`: render geçişlerini tanır ve eşleştirir (shader'sız/DMS/NMS, bbox, yakınlık, kopyalar). `compare.py`: taslağı referansla ölçerek karşılaştırır (yan yana, büyütülmüş kesit, piksel profili, renk farkı). `zoom.py`: ızgaralı büyütülmüş kesit (referansta konum/ölçü okumak için). `glow_profile.py`: parlama halesinin uzaklığa göre sönüşü (trim, büyü, lav). `mc_effect_box.py`: oyunun kendi font/kutu/ikon dosyalarıyla efekt kutusu PNG'si (Mojang dosyaları repoya konmaz). `thumbkit.py`: tekniklerin kodla uygulanmış hali (NMS gölge, renk eşleme, sis, ambient, 3 katmanlı kenar, rim, yerleşim, temas gölgesi, odak çizgileri, ışıyan öğe halesi `bloom`, sinematik geçiş `dof`/`god_rays`/`particles`/`split_tone`/`vignette`, 3D UI levhası, split, export: tam boy PNG + 2 MB altı JPG). |
+| `tools/` | `analyze_reference.py` (Pillow): boyut, oran, palet, parlaklık/doygunluk, 120/168 px önizleme. `catalog_renders.py`: render geçişlerini tanır ve eşleştirir (shader'sız/DMS/NMS, bbox, yakınlık, kopyalar; bütün karakter geçişlerinde ortak, ayrılamamış nesneyi uyarır). `compare.py`: taslağı referansla ölçerek karşılaştırır (yan yana, büyütülmüş kesit, piksel profili, renk farkı). `zoom.py`: ızgaralı büyütülmüş kesit (referansta konum/ölçü okumak için). `glow_profile.py`: parlama halesinin uzaklığa göre sönüşü (trim, büyü, lav). `mc_effect_box.py`: oyunun kendi font/kutu/ikon dosyalarıyla efekt kutusu PNG'si (Mojang dosyaları repoya konmaz). `thumbkit.py`: tekniklerin kodla uygulanmış hali (NMS gölge, renk eşleme, sis, ambient, 3 katmanlı kenar, rim, yerleşim, temas gölgesi, odak çizgileri, ışıyan öğe halesi `bloom`, sinematik geçiş `dof`/`god_rays`/`particles`/`split_tone`/`vignette`, 3D UI levhası, split, export: tam boy PNG + 2 MB altı JPG). |
 | `dev/` | Yol haritası, değişiklik günlüğü. |
 | `skills/minecraft-thumbnail/` | Skill giriş noktası (SKILL.md). |
 | `.claude-plugin/` | Plugin ve marketplace manifestleri. |
+| `hooks/` | Plugin hook'u: `rule.py` (UserPromptSubmit) thumbnail ile ilgili mesajlarda kuralı ve kullanıcı tercihlerini bağlama ekler. Tercih değişince buradaki metni de güncelle. |
 | `commands/` | Plugin slash komutları: `/mcthumb:order`, `/mcthumb:ref`, `/mcthumb:check`, `/mcthumb:learn`. |
 | `assets/` | Logo ve banner (SVG kaynak + PNG). Özgün tasarım: normal-map renkli voxel küp + highlight çizgisi. `assets/examples/`: plugin'le yapılmış örnek işler (ham render → son görsel), README'de gösterilir. |
 | `orders/` | **Sadece yerel** (gitignore). Müşteri siparişleri: `orders/YYYY-MM-DD-kisa-ad/brief.md` + `renders/` + `refs/` + `compose.py` + çıktılar. `/mcthumb:order` oluşturur. |

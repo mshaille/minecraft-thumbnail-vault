@@ -23,6 +23,8 @@ Skill'in "hafızası" bu not. Her referans eklendiğinde tekrar eden kalıplar b
   - Ders: render'larda NPC'ler dünya bloklarıyla kesik gelir; NPC'leri tek tek taşıma, birbirleriyle z-buffer ile birleştir.
   - Ders: referansın ölçülerine eşlemek yetmeyebilir. Kullanıcı ilk taslağı "çok düz, normal resimden ayıran bir şey yok" diye buldu. S2'de alan derinliği, kaynaktan arka ışık, kenar ışığı, partikül, grading ve vinyetten oluşan sinematik geçişi baştan düşün.
   - Ders: kullanıcı trim parlamasını referans şiddetinin ~%20'si istedi; yakın plan karakteri aydınlık istedi (V ~0,65+).
+- **Referanssız "kupa" sahnesi (Kupa, 2026-10-04):** tek ışık kaynağı olan nesne (altın kupa) üst ortada; 11 oyuncu çemberde ona bakıyor. Oda karanlık, ışık kupadan düşüyor, karakterlerde altın kenar ışığı, altın parıltılar. 168x94'te kupa ilk bakılan yer.
+  - Ders: metal nesne render'da düz gelir; yüz yönüne göre gölge + Gradient Map şart. Hale bütün nesneden değil parlak yüzlerden.
 
 ## Testten dersler
 - Kural: **ÜŞENGEÇLİK YOK.** İlk kenar denemesi tek bir beyaz çizgiydi. Ölçünce kenarın 3 katman olduğu çıktı (dış koyu bant, mavimsi beyaz kontur, içte ışık/gölge şeridi). Ayrıca karakterler fazla soluktu, gökyüzü referanstan çok açıktı, kutu küçüktü ve karakterler yanlış yerdeydi. Hepsi **ölçülerek** düzeltildi: `remap` ile renk eşleme, `place_fit` ile referans konumu, `outline` ile kenar.

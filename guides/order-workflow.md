@@ -16,6 +16,9 @@ updated: 2026-10-01
 | Yükleme sırası: **sağ panel → sol panel → referans** | Kullanıcı mesajda "sağ panel" / "sol panel" yazar. Split işte her mesaj bir panelin render'larıdır, referans en son gelir. Dosyalar numaralı ve adsız gelebilir. **Aynı dosya iki kez gelebilir**; kopyalar atılır. |
 | Render'lar masaüstündeki bir klasörde | Çok dosya olunca kullanıcı render'ları masaüstüne bir klasöre koyar (ör. `MMM`; adlar `<tarih>_<geçiş>_3840x2160_cam1_npc-<ad>-<hash>.png`, geçiş = `no-shader`, `DMS_1.6` ya da `NMS_1.7`). Dosyaları `orders/<is>/renders/` içine `<ad>-<hash4>-<geçiş>.png` adıyla kopyala, sonra katalogla. |
 | Tek karakter için yeni render (skin değişikliği) | Sohbete yüklenen görseller küçülmüş gelir (ör. 2000 px webp). Aynı NPC'nin 4K orijinali Modrinth App'te profilin `screenshots` klasöründedir (`..._npc-<yeni-ad>-<aynı hash>.png`). Hash aynıysa poz aynıdır: bbox ve alfayı karşılaştır, sonra `CLAN` listesinde adı değiştir. Kullanıcının "sol/sağ" demesine değil, bbox eşleşmesine bak. |
+| Referans yok | Tarzı brief'ten ve sahneden seç (Kupa işi: tek ışık kaynağı olan nesne → S2), varsayılanlarla başla: karakterler aydınlık, parlamalar hafif, arka plan bulanıklığı hafif, ortam düz değil. Referans ölçümü yerine 168x94 okunurluk ve bölge parlaklıklarıyla kontrol et. |
+| Uygulamanın ayıramadığı nesne | "Uygulama kesememiş" denirse: nesne her karakter render'ına aynen kopyalanmıştır. `catalog_renders.py` uyarır; maske = bütün karakter geçişlerinde ortak opak pikseller. Karakterlerden çıkar, ayrı katman yap (NMS/DMS herhangi bir karakter geçişinden). |
+| Kural her mesajda yazılmaz | Plugin hook'u (`hooks/rule.py`) kuralı ve bu tercihleri otomatik ekler. Kullanıcı yazmasa da geçerli. |
 | "Planı sana bırakıyorum" | Tarzı, renk kararlarını ve yerleşimi sen seç; değişen her kararı (ör. palet referanstan farklı kaldıysa) teslimde seçenek olarak yaz. |
 | Kullanıcının çıkardığı öğe konmaz | Örnek: "oku şimdilik ekleme" → ok yok. Sonra istenirse eklenir. Referanstaki her şeyi körü körüne kopyalama; brief'teki "Olmasın" listesi önce gelir. |
 | **Oyun yazısı uydurulmaz** | UI metni oyunun resmi çevirisiyle (dil dosyası) ve oyunun kendi fontuyla yazılır: [`tools/mc_effect_box.py`](../techniques/text-typography.md). Benzer bir piksel font kullanılmaz. |
@@ -111,5 +114,7 @@ export(canvas, 'thumbnail')
 | Mutlak eşikle hale ölçmek | Taslaktaki parlak hale "çekirdek" sayılır, oranlar tutmaz | `tools/glow_profile.py` göreli eşik kullanır: iki görselde aynı tanım. |
 | Render'da sönük ışık kaynağı | Lav (128,48,0) gibi sönük, maske yakalamaz | Rengini tanımla (turuncu: R > 1,8 G, G > 0,2 R, B ≈ 0), ×1,9 parlat, geniş bloom ver. |
 | İkili alfa (yumuşatma yok) | 4K'da tırtıklı kenar | Görünürlük maskesini ~1 px bulanıklaştır. |
+| Render'da metal yüzler düz | Altın kupa tek renk sarı leke gibi, hale silüeti yutar | Yüzleri NMS yönüne göre elle gölgele (üst ×1,25, ön ×0,82, yan ×0,55), `gradient_map` ile altın rampası; haleyi yalnız parlak yüzlerden çıkar ([09 Glow](../techniques/09-glow.md)). |
+| Kenar ışığı skin'in iç boşluklarına uygulanır | Dış katman ile kol arasında ince parlak çizgiler | Kenar ışığını boşlukları kapatılmış silüete uygula (`blur(alfa) > 0,35`). Çizgi kalırsa **önce ham render'a bak**: skin'in kendi detayı olabilir (Kupa işinde bileklik). |
 
 İlgili: [Referansa göre uyarlama](../techniques/adapt-to-reference.md) · [Dikkat edilecekler](pitfalls.md) · [Yaygın hatalar](common-mistakes.md) · [Referanslardan öğrenilenler](../references/lessons.md)

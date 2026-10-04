@@ -23,6 +23,16 @@ Referansta yeşil trim'ler zırhtan daha parlak ve çevrelerine yumuşak bir hal
 4. **Ortam:** trim rengi ortamın rengine yakınsa (Nether'de kırmızı trim) ortamın doygunluğunu yarıya indir. Referansta ortam doygunluğu 0,15–0,26, karakterler ve trim'ler doygundu; ortam doygun kalınca kırmızı trim kayboluyor.
 5. **Ölç:** `python3 tools/glow_profile.py <görsel> --color g|r|b --region x0,y0,x1,y1` referansta ve taslakta aynı bölgede.
 
+## Altın / metal nesne (kupa, ölçülmüş: Kupa siparişi 2026-10-04)
+Render'da (no-shader) metal nesnenin bütün yüzleri neredeyse aynı parlaklıkta gelir (kupada L 0,63–0,67), metal gibi durmaz.
+1. **Yüz yönüne göre gölge** (NMS): üst (yeşil) ×1,25, ön (kırmızı) ×0,82, yan (mavi) ×0,55, diğer ×0,45.
+2. **Gradient Map** (altın rampası, L → renk): 0 (30,16,2) · 0,3 (110,62,8) · 0,55 (200,135,20) · 0,75 (245,190,50) · 0,92 (255,228,120) · 1,0 (255,245,200). Kod: `thumbkit.gradient_map`.
+3. **Parlak detay:** üst yüz kenarlarında ince ışık (σ 1 px, %45), nesne boyunca çapraz parlak şerit (%22, Screen), 3–4 dört kollu yıldız parıltısı (`thumbkit.sparkles`, r ~42 px @1280).
+4. **Hale yalnız parlak yüzlerden** (L > 0,6): bloom σ 3/14/45, şiddet 0,3/0,45/0,45. Bütün nesneden hale verilince silüet kayboldu.
+5. Nesne sahnenin ışık kaynağıysa: huzme (`god_rays`, Screen ×0,75), karakterlerde ona bakan kenarlarda altın kenar ışığı, odada ışık düşüşü (nesne 1,0 → uzak köşe 0,5).
+
+Photoshop karşılığı (metal): Gradient Map katmanı (Clipping Mask) + Curves ile yüz kontrastı + yumuşak beyaz fırçayla Overlay parlak şerit + yıldız fırçası.
+
 Photoshop karşılığı: trim'leri Color Range ile seç → yeni katmana kopyala → Hue/Saturation ile parlat (Lightness +, Saturation +) → kopyayı Gaussian Blur ~5 px (1280'de) + Linear Dodge/Screen, bir kopya daha ~15 px blur ve düşük opaklıkla.
 
 Önceki: [Renk değiştirme](08-recolor.md) · Sonraki: [Gökyüzü ve asset'ler](10-sky-and-assets.md)

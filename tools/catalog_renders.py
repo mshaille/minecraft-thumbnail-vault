@@ -6,6 +6,7 @@
   'birim normal oranı − doku' skoru yüksek olan NMS (tek başına eşik güvenilmez: ör. balkabağı skini birim normal gibi görünür).
 - Aynı karakterin geçişleri aynı şeffaflık sınırını (bbox) paylaşır; şeffaflığı olmayanlar arka plandır.
 - Karakter DMS'inin ortalama grisi yakınlığı verir (beyaz = yakın).
+- Bütün karakter geçişlerinde ortak opak pikseller = uygulamanın ayıramadığı nesne (ör. kupa): uyarılır, bbox'lardan çıkarılır.
 
   python3 tools/catalog_renders.py <klasör veya dosyalar...>
 """
@@ -19,6 +20,17 @@ files = [p for a in sys.argv[1:] for p in (sorted(Path(a).iterdir()) if Path(a).
 def name_hint(n):
     n = n.lower().replace('_', '-')
     return 'dms' if 'dms' in n else 'nms' if 'nms' in n else 'shadersiz' if ('no-shader' in n or 'noshader' in n) else None
+
+common = None                                                    # şeffaf geçişlerin ortak opak pikselleri
+for f in files:
+    al = np.asarray(Image.open(f).convert('RGBA'))[..., 3] > 0
+    if not al.all(): common = al if common is None else (common & al)
+if common is not None and common.mean() > 0.002:
+    ys, xs = np.nonzero(common)
+    print(f"> Bütün karakter geçişlerinde ortak {common.sum()} px, bbox ({xs.min()}, {ys.min()}, {xs.max()}, {ys.max()}): "
+          "uygulamanın ayıramadığı bir nesne (ör. kupa). Kendin ayır: ortak alfa kesişimi = nesne maskesi; karakterlerden çıkar.\n")
+else:
+    common = None
 
 seen, groups = {}, {}
 for f in files:
@@ -34,7 +46,8 @@ for f in files:
     unit = (np.abs(np.linalg.norm(px / 127.5 - 1, axis=1) - 1) < 0.15).mean() if len(px) else 0
     dx = np.abs(np.diff(a[..., :3], axis=1)).sum(-1); m = alpha[:, 1:] & alpha[:, :-1]
     tex = (dx[m] > 6).mean() if m.any() else 0
-    key = rgba.getchannel('A').getbbox() if has_alpha else 'arka-plan'
+    key = (Image.fromarray(((alpha & ~common) if common is not None else alpha).astype(np.uint8) * 255).getbbox()
+           if has_alpha else 'arka-plan')
     near = round(float(a[..., 0][alpha].mean())) if (gray and has_alpha) else None
     groups.setdefault(key, []).append(dict(name=f.name, hint=name_hint(f.name), gray=gray, score=unit - tex, near=near))
 

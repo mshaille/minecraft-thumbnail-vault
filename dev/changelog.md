@@ -28,3 +28,9 @@ tags: [gelistirme]
 - Sipariş akışı: render'ların masaüstü klasöründen gelmesi, "planı sana bırakıyorum", çoklu NPC z-buffer birleştirme, NPC'lerin dünya bloklarıyla kesik gelmesi, ışığın yüzey rengiyle çarpılması, sönük ışık kaynağı tuzakları. S2 kartına doğrulanmış değerler, uyarlama tablosuna üç satır.
 - Trim klanı revizyonları: sol karakter aydınlatıldı, trim parlaması "çok hafif"e indirildi (referansın ~%20'si), ortam "düz" bulununca sinematik geçiş eklendi. thumbkit: `gblur`, `dof`, `god_rays`, `particles`, `vignette`, `split_tone`; kataloğun N3/N5/N7/N9/N15 satırlarına kod karşılıkları.
 - Örnek iş README'ye eklendi (kullanıcı isteğiyle): `assets/examples/trim-clan-raw.jpg` → `trim-clan.jpg`.
+
+## 2026-10-04
+- Üçüncü sipariş: "Kupa" (referans yok, S2 tek ışık kaynağı). Uygulamanın ayıramadığı kupa, bütün karakter geçişlerinde ortak piksellerden kesildi.
+- Plugin hook'u `hooks/rule.py` (UserPromptSubmit): thumbnail ile ilgili mesajlarda kural ve kullanıcı tercihleri otomatik eklenir.
+- `catalog_renders.py`: bütün karakter geçişlerinde ortak nesneyi bulur, uyarır ve bbox'lardan çıkarır.
+- thumbkit: `gradient_map` (altın/metal rampası), `sparkles` (dört kollu parıltı). [09 Glow](../techniques/09-glow.md): ölçülmüş altın/metal nesne tekniği.

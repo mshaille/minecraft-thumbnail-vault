@@ -107,6 +107,23 @@ def particles(size, n, box, seed=3, r=(1, 3), colors=((255, 122, 26),), alpha=(0
         d.ellipse((x - rr, y - rr, x + rr, y + rr), fill=tuple(c) + (int(255 * rnd.uniform(*alpha)),))
     return out.filter(ImageFilter.GaussianBlur(blur)) if blur else out
 
+def gradient_map(rgb, stops):
+    """Gradient Map: parlaklığı renk rampasına eşle. stops: [(L 0..1, (r,g,b) 0..255), ...] artan L sırasıyla.
+    Altın/metal için: koyu kahve → altın → açık altın → beyaz."""
+    L = rgb @ [0.299, 0.587, 0.114]; xs = [s for s, _ in stops]; cs = np.array([c for _, c in stops]) / 255
+    return np.dstack([np.interp(L, xs, cs[:, c]) for c in range(3)])
+
+def sparkles(size, points, r=40, width=2.0, color=(255, 246, 210)):
+    """Dört kollu yıldız parıltısı (metal kenarındaki ışık noktası). points: [(x, y, ölçek), ...]. Döner: H×W×4 (0..1)."""
+    m = Image.new('L', size, 0); d = ImageDraw.Draw(m)
+    for x, y, s in points:
+        R, w = r * s, max(1.0, width * s)
+        for dx, dy in ((1, 0), (0, 1)):                                   # yatay + dikey kol, uçlara doğru incelir
+            d.polygon([(x - dx * R, y - dy * R), (x - dy * w, y + dx * w), (x + dx * R, y + dy * R), (x + dy * w, y - dx * w)], fill=255)
+        d.ellipse((x - 2.2 * w, y - 2.2 * w, x + 2.2 * w, y + 2.2 * w), fill=255)
+    a = np.maximum(A(m), A(m.filter(ImageFilter.GaussianBlur(r * 0.08))) * 1.6)
+    return np.dstack([np.ones(m.size[::-1]) * c / 255 for c in color] + [np.clip(a, 0, 1)])
+
 def vignette(rgb, strength=0.35, inner=0.55, outer=1.2):
     """N5 vinyet (Multiply): köşeler `strength` kadar kararır."""
     H, W = rgb.shape[:2]; yy, xx = np.mgrid[0:H, 0:W]

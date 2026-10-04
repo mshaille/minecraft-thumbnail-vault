@@ -32,6 +32,8 @@ What the plugin did:
 
 Every step was measured against a reference image with `tools/compare.py` and `tools/glow_profile.py`, then revised from the client's feedback: a brighter close character, subtler trims, less background blur, and one clan member re-rendered with a new skin. It was rendered at 3840x2160 by `tools/thumbkit.py`.
 
+**Always-on rule.** The plugin ships a `UserPromptSubmit` hook (`hooks/rule.py`): whenever a message is about a thumbnail (render, skin, trims, reference, order…), it adds the working rule ("no laziness: measure, finish every layer, render a real draft, compare side by side, report every remaining difference") and the client's standing preferences to the context, so they never have to be typed again.
+
 ## Commands
 | Command | What it does |
 |---|---|
